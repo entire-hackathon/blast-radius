@@ -33,9 +33,9 @@ describe("MarkdownRenderer", () => {
 
   it("puts a colour legend under the mermaid diagram", () => {
     const body = new MarkdownRenderer().render(sampleReport()).body;
-    expect(body).toContain("🟥 flagged");
-    expect(body).toContain("🟩 covering test");
-    expect(body).toContain("arrow = calls / depends on");
+    expect(body).toContain("🟥 changed — flagged");
+    expect(body).toContain("🟩 not changed — a test");
+    expect(body).toContain("A calls / depends on B");
   });
 
   it("omits the diagram when disabled or when the radius has no callers", () => {

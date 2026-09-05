@@ -224,13 +224,13 @@ export class MarkdownRenderer implements Renderer {
 
     const body = lines.join("\n");
     const legend = [
-      body.includes(":::finding") ? "🟥 flagged — outside the stated intent" : "",
-      body.includes(":::changed") ? "🟨 changed, in scope" : "",
-      body.includes(":::caller") ? "⬜ caller (unchanged, in the radius)" : "",
-      body.includes(":::test") ? "🟩 covering test" : "",
+      body.includes(":::finding") ? "🟥 changed — flagged, outside the stated intent" : "",
+      body.includes(":::changed") ? "🟨 changed — in scope" : "",
+      body.includes(":::caller") ? "⬜ not changed — calls the change, so may be affected" : "",
+      body.includes(":::test") ? "🟩 not changed — a test that covers the change" : "",
     ].filter(Boolean);
 
-    return `${body}\n<sub>${legend.join("  ·  ")} · arrow = calls / depends on</sub>`;
+    return `${body}\n<sub>${legend.join("  ·  ")}<br>arrow: A → B means A calls / depends on B</sub>`;
   }
 
   private checkpointNote(r: AnalysisReport): string {
