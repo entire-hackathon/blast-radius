@@ -1,0 +1,194 @@
+# Blast Radius — Build Plan
+
+Track 02 · Build with Graph Intelligence.
+Hackathon build day: **Sunday, Sep 6**. Noon Curve Ball at **12:00 IST**.
+This plan is written so a fresh agent session can pick it up cold.
+
+---
+
+## 0. Status board
+
+| Phase | State |
+| --- | --- |
+| P0 Fixtures + scaffold | ☐ |
+| P1 Domain model + pipeline harness | ☐ |
+| P2 Blast radius stage | ☐ |
+| P3 Scope-creep strategies | ☐ |
+| P4 Test selection | ☐ |
+| P5 Renderers (markdown/json/sarif) | ☐ |
+| P6 Adapters (graph cli, intent, sink) | ☐ |
+| P7 CLI + composition root | ☐ |
+| P8 GitHub Action + demo repo | ☐ |
+| P9 Dogfood + snapshot lock | ☐ |
+| P10 Pitch deck + recording | ☐ |
+
+Update the boxes as you go. Each phase ends with `npm test` green.
+
+---
+
+## 1. Ground rules
+
+1. **TDD.** Write the failing test first for every `domain/` unit. Red → green → commit.
+2. **No `new Adapter()` outside `composition-root.ts`.**
+3. **Nothing external is trusted.** Parse every JSON blob through a `zod` schema on entry.
+4. **Conventional commits** (`feat:`, `fix:`, `test:`, `docs:`, `chore:`) — tomorrow's
+   reconstruction reads these.
+5. **Every port ships with a fake.** A port without a test double is not done.
+6. Keep the domain free of Node I/O modules. If `domain/` imports `fs` or `child_process`, stop.
+
+---
+
+## 2. Tooling
+
+| Concern | Choice | Why |
+| --- | --- | --- |
+| Language | TypeScript, ESM, Node ≥ 20 (dev on 24) | one language across CLI + Action |
+| Test runner | vitest | TS-native, fast, snapshot support |
+| Schema validation | zod | boundary validation + inferred types |
+| CLI parsing | commander | standard, minimal |
+| Subprocess | execa | safe argv, promises, no shell injection |
+| Lint | eslint + `eslint-plugin-boundaries` | enforces the hexagonal import rule |
+| Format | prettier | zero-config |
+| Build | `tsc` → `dist/`, `bin` → `dist/cli.js` | no bundler to debug |
+| GitHub API | `gh` CLI via execa | already on the runner; no Octokit tree |
+
+`package.json` scripts: `build`, `test`, `test:watch`, `lint`, `typecheck`,
+`review` (`node dist/cli.js review`).
+
+---
+
+## 3. Phases
+
+### P0 — Fixtures + scaffold  ·  ~45 min
+- [ ] `entire-graph` built for Linux in Docker → `fixtures/bin/entire-graph-linux` (dev only, git-ignored) — *(agent task, running now)*
+- [ ] Capture real JSON against the `entire-graph` repo itself:
+      `diff --base HEAD~5 --head HEAD --json`,
+      `impact --symbol AnalyzeCheckpoint --format json`,
+      `impact --symbol runCheckpoint --format json`,
+      `neighbors --symbol <x> --relation CALLS --direction in --format json`
+      → `fixtures/entire-graph/*.json`
+- [ ] `npm init`, tsconfig (strict), vitest config, eslint + boundaries rule, prettier
+- [ ] Folder skeleton exactly as `ARCHITECTURE.md §4`
+- [ ] `git commit -m "chore: scaffold blast-radius"`
+
+### P1 — Domain model + pipeline harness  ·  ~45 min
+- [ ] `domain/model.ts`: zod schemas + inferred types for
+      `SymbolRef`, `ChangedSymbol`, `ChangeSet`, `ImpactSection`, `RadiusNode`,
+      `BlastRadius`, `IntentModel`, `Finding`, `TestCandidate`, `TestPlan`,
+      `RadiusSummary`, `AnalysisReport` (with `schemaVersion`)
+- [ ] `domain/errors.ts`: `BlastRadiusError` union (`BinaryNotFound`, `GraphError`,
+      `GitError`, `IntentUnavailable`, `SinkError`), `Result<T,E>`, `ok`, `err`, `map`, `unwrapOr`
+- [ ] `domain/pipeline.ts`: `Stage<In,Out>`, `compose(...stages)`, `runPipeline(ctx)`
+- [ ] Tests: schema round-trips, `compose` associativity, `Result` helpers
+- [ ] commit `feat: domain model + pipeline harness`
+
+### P2 — Blast radius stage  ·  ~40 min
+- [ ] `domain/blast-radius.ts`: `computeBlastRadius(changeSet, impacts): BlastRadius`
+      — union sections, dedupe by `(file,symbol)` keeping min distance, tag origin symbol + relation path
+- [ ] `domain/summary.ts`: `summarizeRadius(radius, cfg): RadiusSummary`
+- [ ] Tests with hand-built impact objects: dedup, distance-keeping, bucket counts, module/service counts
+- [ ] commit `feat: blast radius + summary stages`
+
+### P3 — Scope-creep strategies  ·  ~40 min
+- [ ] `domain/scope-creep/strategy.ts`: `ScopeCreepStrategy` iface, `CompositeStrategy`
+- [ ] `keyword-overlap.ts`, `dependents.ts` (algorithms per `ARCHITECTURE.md §6.2`)
+- [ ] `domain/intent-keywords.ts`: tokenizer + stopwords + light stemmer (pure)
+- [ ] Tests: obvious in-scope change → no finding; unrelated wide change → finding;
+      threshold boundaries; evidence payload shape
+- [ ] commit `feat: scope-creep detection strategies`
+
+### P4 — Test selection  ·  ~40 min
+- [ ] `domain/test-selection.ts`: `selectTests(radius, cfg): TestPlan`
+      — classify test nodes, score, greedy minimal cover, coverage gaps, run-command synthesis
+- [ ] Tests: ranking order, minimal-set correctness, gap reporting, command strings for go/vitest/pytest
+- [ ] commit `feat: proximity-ranked test selection`
+
+### P5 — Renderers  ·  ~45 min
+- [ ] `ports/renderer.ts`
+- [ ] `adapters/render/markdown.ts` — headline line, scope table, `<details>` test plan + fenced run command, `<details>` radius, evidence anchors, `<!-- blast-radius -->` marker
+- [ ] `adapters/render/json.ts` — `AnalysisReport` verbatim
+- [ ] `adapters/render/sarif.ts` — findings → SARIF 2.1.0 results
+- [ ] Snapshot tests for each
+- [ ] commit `feat: markdown / json / sarif renderers`
+
+### P6 — Adapters  ·  ~60 min
+- [ ] `ports/*` finalised
+- [ ] `adapters/graph/fixture.ts` — reads `fixtures/entire-graph/`
+- [ ] `adapters/graph/entire-graph-cli.ts` — execa, argv-safe, zod-validate stdout, map non-zero exit → `GraphError`
+- [ ] `adapters/intent/pr-body.ts`, `github-issue.ts`, `checkpoint-trailer.ts`, `composite.ts`
+- [ ] `adapters/sink/stdout.ts`, `file.ts`, `github-comment.ts` (upsert own comment)
+- [ ] Tests: cli adapter vs fixture parity; composite intent ordering + source attribution; sink upsert logic with a `gh` spy
+- [ ] commit `feat: graph / intent / sink adapters`
+
+### P7 — CLI + composition root  ·  ~35 min
+- [ ] `app/config.ts` — zod config, merge env + flags, defaults
+- [ ] `app/review.ts` — build pipeline, run, hand report to renderer(s) + sink(s)
+- [ ] `composition-root.ts` — factory: `--fixture` → FixtureGraphAdapter; CI env → GitHubCommentSink; etc.
+- [ ] `cli.ts` — `blast-radius review [--base] [--head] [--repo] [--fixture <dir>] [--format md|json|sarif]... [--out <f>] [--intent-source <list>] [--fail-on-findings]`
+- [ ] E2E: `fixtures/scenarios/redirect-rate-limit` → snapshot the Markdown
+- [ ] commit `feat: cli + composition root`
+
+### P8 — GitHub Action + demo repo  ·  ~60 min
+- [ ] `action.yml` composite (per `ARCHITECTURE.md §8`)
+- [ ] `blast-radius-demo/` — small TS "linkshrink" service (~12 files, real call graph):
+      `http/redirect.ts` → `service/redirect.ts` → `repo/link-repo.ts` → `db/database.ts`;
+      `service/rate-limit.ts`; tests per layer
+- [ ] Seed history: an `Entire-Checkpoint:` trailer + `.entire/intent/<id>.json`
+      = *"add token-bucket rate limiting to the redirect endpoint"*
+- [ ] Staged PR branch: adds rate limiting **and** changes `Database.query`
+      signature (`query(sql)` → `query(sql, opts)`) touching every repo module
+- [ ] `.github/workflows/blast-radius.yml` in the demo repo
+- [ ] Push both repos, open the PR, confirm the comment renders
+- [ ] commit `feat: composite action` + demo repo initial push
+
+### P9 — Dogfood + lock  ·  ~30 min
+- [ ] Add `blast-radius.yml` to *this* repo, open a throwaway PR, verify comment
+- [ ] Freeze the demo scenario snapshot; `npm test` green end to end
+- [ ] `README.md` final pass (install, usage, action, sample output, how it uses the graph)
+- [ ] Tag `v0.1.0`
+- [ ] commit `chore: release v0.1.0`
+
+### P10 — Pitch  ·  ~45 min
+- [ ] 5 slides: problem → what it does → **graph as dependency (pipeline diagram)** → **intent cross-check (the novel bit)** → impact/practicality + curveball story
+- [ ] 2-min screen recording: open PR → comment → click a flag → land on `Database.query` → run suggested test → green
+- [ ] One-paragraph "how we used Entire Graph" for the submission form
+- [ ] Backup: the recording, in case live demo network fails
+
+---
+
+## 4. Definition of done
+
+- `npm run lint && npm run typecheck && npm test` green.
+- `blast-radius review --fixture fixtures/entire-graph --format markdown` prints
+  the demo report on any machine with **only Node** (no Go, no entire-graph binary).
+- The demo repo PR shows a real Blast Radius comment, posted by the Action.
+- Every scope finding and every recommended test in the comment links to an
+  evidence block naming the graph path.
+- SARIF uploads and the findings appear in the demo PR's "Code scanning" tab.
+- `README.md` explains what it does, how to run it, and how it consumes the graph.
+
+---
+
+## 5. If time runs short (drop in this order)
+
+1. SARIF renderer (keep json)
+2. `github-issue` intent adapter (keep pr-body + checkpoint-trailer)
+3. `neighbors`-based distance refinement (use `impact` distances only)
+4. Self-dogfood workflow (keep the demo repo one)
+5. Embedding-based scope strategy (never in v1 anyway)
+
+Never drop: blast-radius stage, keyword-overlap scope check, test selection,
+markdown renderer, the composite action, the demo repo PR.
+
+---
+
+## 6. Reconstruction checklist (for the Sep 6 "fresh session" pitstop)
+
+1. Read `docs/ARCHITECTURE.md`, then this file's status board.
+2. `git log --oneline -20` — the conventional commits are the timeline.
+3. `npm ci && npm test` — green means the core is intact.
+4. `blast-radius review --fixture fixtures/entire-graph --format markdown` — see current output.
+5. Read the Noon Curve Ball constraint. Find its row in `ARCHITECTURE.md §9`.
+6. `blast-radius review` on the demo PR to *see the blast radius of your own planned change* before editing.
+7. Implement the constraint as an adapter/strategy/stage. Add a test. Snapshot.
+8. Re-record the relevant 20 seconds of the demo. Submit. Check in.

@@ -1,0 +1,6 @@
+node_modules/
+dist/
+fixtures/bin/
+*.log
+.DS_Store
+coverage/
