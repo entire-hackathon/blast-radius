@@ -47,6 +47,8 @@ export class AnalysisReportBuilder {
       0,
     );
 
+    const findingNames = new Set(input.findings.map((f) => f.symbol.qualifiedName));
+
     const report: AnalysisReport = {
       schemaVersion: SCHEMA_VERSION,
       generatedAt: (input.now ?? new Date()).toISOString(),
@@ -61,6 +63,23 @@ export class AnalysisReportBuilder {
         fileCount: input.changeSet.changedFiles.length,
         widestDependents,
       },
+      changedSymbols: input.changeSet.symbols.map((s) => ({
+        ref: plainRef(s.ref),
+        changeType: s.changeType,
+        dependentsCount: s.dependentsCount,
+        isFinding: findingNames.has(s.ref.qualifiedName),
+      })),
+      radiusNodes: input.radius.nodes.map((n) => ({
+        ref: plainRef(n.ref),
+        section: n.section,
+        relation: n.relation,
+        direction: n.direction,
+        distance: n.distance,
+        via: [...n.viaChain],
+        origins: [...n.originSymbols],
+        isTest: n.isTest,
+      })),
+      originEdges: input.radius.originEdges.map((e) => ({ from: e.from, to: e.to })),
       radiusSummary: {
         totalNodes: input.summary.totalNodes,
         fileCount: input.summary.fileCount,

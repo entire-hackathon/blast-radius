@@ -94,6 +94,24 @@ describe("computeBlastRadius", () => {
     expect(radius.sectionTotals.data_flows).toBe(0);
   });
 
+  it("records a call edge when one changed symbol calls another", () => {
+    const radius = computeBlastRadius(
+      [changed("Database.query"), changed("LinkRepo.byId")],
+      [
+        [
+          node({
+            qualifiedName: "LinkRepo.byId",
+            section: "callers",
+            originSymbols: ["Database.query"],
+          }),
+        ],
+      ],
+    );
+    expect(radius.originEdges).toEqual([{ from: "LinkRepo.byId", to: "Database.query" }]);
+    // and LinkRepo.byId is still not a blast node (it's an origin)
+    expect(radius.nodes).toHaveLength(0);
+  });
+
   it("orders nodes by distance then name", () => {
     const radius = computeBlastRadius(
       [changed("A")],

@@ -35,6 +35,7 @@ const changed = (qualifiedName: string): ChangedSymbol => ({
 const radius = (nodes: RadiusNode[]): BlastRadius => ({
   origin: [],
   nodes,
+  originEdges: [],
   sectionTotals: {
     callers: 0,
     callees: 0,

@@ -48,6 +48,7 @@ const changeSet = (symbols: ChangedSymbol[]): ChangeSet => ({
 const emptyRadius: BlastRadius = {
   origin: [],
   nodes: [],
+  originEdges: [],
   sectionTotals: {
     callers: 0,
     callees: 0,

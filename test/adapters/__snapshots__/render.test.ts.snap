@@ -4,10 +4,28 @@ exports[`MarkdownRenderer > renders the full comment (snapshot) 1`] = `
 "<!-- blast-radius:v1 -->
 ## 🧨 Blast Radius
 
-**3 nodes** · 2 modules · 1 service · **1 scope finding** · **2 tests**
+![blast radius](https://img.shields.io/badge/blast_radius-3_nodes-1f6feb) ![modules](https://img.shields.io/badge/modules-2-1f6feb) ![services](https://img.shields.io/badge/services-1-8250df) ![scope](https://img.shields.io/badge/scope-1_findings-da3633) ![tests](https://img.shields.io/badge/tests-2_selected-2da44e) ![intent](https://img.shields.io/badge/intent-checkpoint--trailer-8250df)
 
 > **Intent** — _"add token-bucket rate limiting to the redirect endpoint"_  
 > source: \`checkpoint-trailer\` · \`cp_9f2\`
+
+\`\`\`mermaid
+flowchart LR
+  n0["Database.query"]:::finding
+  n1["RedirectController.handle"]:::changed
+  n1 --> n0
+  n2["LinkRepo.byId"]:::caller
+  n2 --> n0
+  n3["redirect_ratelimit_test"]:::test
+  n3 --> n1
+  n4["database_signature_test"]:::test
+  n4 --> n2
+  classDef finding fill:#ffdcdc,stroke:#e5534b,color:#86181d;
+  classDef changed fill:#fff3d4,stroke:#d4a72c,color:#7a5c00;
+  classDef caller fill:#eef2f6,stroke:#8c959f,color:#1f2328;
+  classDef test fill:#e6f4ea,stroke:#4c9a5f,color:#1a4d2e;
+  classDef more fill:#f6f8fa,stroke:#d0d7de,color:#57606a;
+\`\`\`
 
 ### ⚠️ Scope check — 1 change(s) look outside the ask
 
@@ -43,9 +61,13 @@ npx vitest run test/redirect.test.ts test/database.test.ts -t "redirect_ratelimi
 
 <details><summary>Full blast radius — 3 nodes across 3 files</summary>
 
-_CALLED_BY: 3_
+\`CALLED_BY\` 3
 
-_Full node list is in the JSON / SARIF output (\`--format json\`)._
+| Node | Relation | Dist | From |
+|--|--|--|--|
+| [\`LinkRepo.byId\`](https://github.com/acme/linkshrink/blob/def456/src/repo/link-repo.ts#L8) | \`CALLED_BY\` | 1 | \`Database.query\` |
+| [\`database_signature_test\`](https://github.com/acme/linkshrink/blob/def456/test/database.test.ts#L20) 🧪 | \`CALLED_BY\` | 2 | \`Database.query\` |
+| [\`redirect_ratelimit_test\`](https://github.com/acme/linkshrink/blob/def456/test/redirect.test.ts#L30) 🧪 | \`CALLED_BY\` | 1 | \`RedirectController.handle\` |
 
 </details>
 

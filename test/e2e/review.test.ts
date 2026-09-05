@@ -80,7 +80,7 @@ describe("runReview (e2e, fixture graph)", () => {
     expect(res.value.publishedTo).toEqual(["markdown→capture", "json→capture"]);
     expect(md.last?.body).toContain("🧨 Blast Radius");
     expect(md.last?.body).toContain("Database.query");
-    expect(JSON.parse(json.last!.body).schemaVersion).toBe("1.0.0");
+    expect(JSON.parse(json.last!.body).schemaVersion).toBe("1.1.0");
   });
 
   it("still runs with no intent, producing radius + tests but no scope section", async () => {

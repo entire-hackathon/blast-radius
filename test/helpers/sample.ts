@@ -58,6 +58,7 @@ const changeSet: ChangeSet = {
 
 const radius: BlastRadius = {
   origin: changeSet.symbols,
+  originEdges: [{ from: "RedirectController.handle", to: "Database.query" }],
   sectionTotals: {
     callers: 3,
     callees: 1,

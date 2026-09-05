@@ -9,7 +9,7 @@
  */
 import { z } from "zod";
 
-export const SCHEMA_VERSION = "1.0.0" as const;
+export const SCHEMA_VERSION = "1.1.0" as const;
 
 /* ------------------------------------------------------------- symbols --- */
 
@@ -75,10 +75,18 @@ export interface RadiusNode {
   readonly isTest: boolean;
 }
 
+/** A call edge between two changed symbols (`from` calls `to`). */
+export interface OriginEdge {
+  readonly from: string;
+  readonly to: string;
+}
+
 export interface BlastRadius {
   readonly origin: readonly ChangedSymbol[];
   readonly nodes: readonly RadiusNode[];
   readonly sectionTotals: Readonly<Record<RadiusSection, number>>;
+  /** call edges among the changed symbols themselves (for the diagram). */
+  readonly originEdges: readonly OriginEdge[];
 }
 
 /* --------------------------------------------------------------- intent --- */
@@ -149,6 +157,16 @@ export interface RadiusSummary {
 
 /* --------------------------------------------------------------- report --- */
 
+const refSchema = z.object({
+  name: z.string(),
+  qualifiedName: z.string(),
+  kind: z.string().optional(),
+  file: z.string().optional(),
+  line: z.number().int().optional(),
+  language: z.string().optional(),
+  external: z.boolean(),
+});
+
 export const analysisReportSchema = z.object({
   schemaVersion: z.literal(SCHEMA_VERSION),
   generatedAt: z.string(),
@@ -159,6 +177,14 @@ export const analysisReportSchema = z.object({
     fileCount: z.number().int(),
     widestDependents: z.number().int(),
   }),
+  changedSymbols: z.array(
+    z.object({
+      ref: refSchema,
+      changeType: z.string(),
+      dependentsCount: z.number().int(),
+      isFinding: z.boolean(),
+    }),
+  ),
   radiusSummary: z.object({
     totalNodes: z.number().int(),
     fileCount: z.number().int(),
@@ -167,6 +193,19 @@ export const analysisReportSchema = z.object({
     testCount: z.number().int(),
     byRelation: z.record(z.number().int()),
   }),
+  radiusNodes: z.array(
+    z.object({
+      ref: refSchema,
+      section: z.string(),
+      relation: z.string(),
+      direction: z.string(),
+      distance: z.number().int(),
+      via: z.array(z.string()),
+      origins: z.array(z.string()),
+      isTest: z.boolean(),
+    }),
+  ),
+  originEdges: z.array(z.object({ from: z.string(), to: z.string() })),
   findings: z.array(
     z.object({
       symbol: z.object({

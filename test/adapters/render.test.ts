@@ -15,11 +15,31 @@ describe("MarkdownRenderer", () => {
     expect(r.body).toMatchSnapshot();
   });
 
-  it("headline names nodes, findings and tests", () => {
+  it("emits a badge strip covering nodes, scope, tests and intent", () => {
     const body = new MarkdownRenderer().render(sampleReport()).body;
-    expect(body).toContain(
-      "**3 nodes** · 2 modules · 1 service · **1 scope finding** · **2 tests**",
-    );
+    expect(body).toContain("img.shields.io/badge/blast_radius-3_nodes-");
+    expect(body).toContain("img.shields.io/badge/scope-1_findings-da3633"); // high severity → red
+    expect(body).toContain("img.shields.io/badge/tests-2_selected-2da44e");
+    expect(body).toContain("img.shields.io/badge/intent-checkpoint--trailer-");
+  });
+
+  it("renders a mermaid graph of changed symbols and their callers", () => {
+    const body = new MarkdownRenderer().render(sampleReport()).body;
+    expect(body).toContain("```mermaid");
+    expect(body).toContain("flowchart LR");
+    expect(body).toContain(":::finding"); // Database.query is flagged
+    expect(body).toMatch(/n\d+ --> n\d+/); // at least one edge
+  });
+
+  it("omits the diagram when disabled or when the radius has no callers", () => {
+    const body = new MarkdownRenderer({ diagram: false }).render(sampleReport()).body;
+    expect(body).not.toContain("```mermaid");
+  });
+
+  it("lists the full node table in the radius details", () => {
+    const body = new MarkdownRenderer().render(sampleReport()).body;
+    expect(body).toContain("| Node | Relation | Dist | From |");
+    expect(body).toContain("`CALLED_BY`");
   });
 
   it("degrades gracefully with no intent", () => {

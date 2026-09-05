@@ -26,6 +26,7 @@ const node = (over: Partial<RadiusNode> & { file: string }): RadiusNode => ({
 const radius = (nodes: RadiusNode[]): BlastRadius => ({
   origin: [],
   nodes,
+  originEdges: [],
   sectionTotals: {
     callers: 0,
     callees: 0,
