@@ -69,6 +69,18 @@ export function symbolTokens(qualifiedName: string, file: string | undefined): S
   return normalize([...fromName, ...fromFile]);
 }
 
+/** Extract `#123` / `GH-123` / `owner/repo#123` issue references from text. */
+export function extractIssueRefs(text: string): string[] {
+  const refs = new Set<string>();
+  for (const m of text.matchAll(/(?:^|\s)(?:closes?|fixes?|resolves?|ref)?\s*#(\d+)/gi)) {
+    refs.add(`#${m[1]}`);
+  }
+  for (const m of text.matchAll(/\b([\w.-]+\/[\w.-]+)#(\d+)\b/g)) {
+    refs.add(`${m[1]}#${m[2]}`);
+  }
+  return [...refs];
+}
+
 export interface OverlapResult {
   readonly overlap: number;
   readonly shared: string[];

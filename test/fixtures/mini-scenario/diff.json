@@ -1,0 +1,52 @@
+{
+  "base": "abc123",
+  "head": "def456",
+  "schema_version": "1.0",
+  "files": [
+    {
+      "path": "src/db/database.ts",
+      "status": "M",
+      "language": "TypeScript",
+      "changes": [
+        { "type": "body_changed", "kind": "module", "name": "src/db/database.ts", "dependents_count": 0 },
+        {
+          "type": "signature_changed",
+          "kind": "method",
+          "name": "Database.query",
+          "old_signature": "query(sql: string)",
+          "new_signature": "query(sql: string, opts?: QueryOptions)",
+          "after_start_line": 41,
+          "dependents_count": 12
+        }
+      ]
+    },
+    {
+      "path": "src/http/redirect.ts",
+      "status": "M",
+      "language": "TypeScript",
+      "changes": [
+        {
+          "type": "body_changed",
+          "kind": "method",
+          "name": "RedirectController.handle",
+          "after_start_line": 12,
+          "dependents_count": 2
+        }
+      ]
+    },
+    {
+      "path": "src/service/rate-limit.ts",
+      "status": "A",
+      "language": "TypeScript",
+      "changes": [
+        {
+          "type": "added",
+          "kind": "class",
+          "name": "TokenBucketRateLimiter",
+          "after_start_line": 1,
+          "dependents_count": 1
+        }
+      ]
+    }
+  ]
+}

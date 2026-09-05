@@ -1,0 +1,7 @@
+{
+  "diff": "diff.json",
+  "impacts": {
+    "Database.query": "impact-db-query.json",
+    "RedirectController.handle": "impact-redirect-handle.json"
+  }
+}

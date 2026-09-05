@@ -1,0 +1,63 @@
+{
+  "format_version": 1,
+  "query": "RedirectController.handle",
+  "file": "src/http/redirect.ts",
+  "line": 12,
+  "disambiguation_required": false,
+  "callers": {
+    "total": 2,
+    "entries": [
+      {
+        "endpoint": {
+          "id": "router",
+          "name": "mount",
+          "qualified_name": "Router.mount",
+          "kind": "method",
+          "file_path": "src/http/router.ts",
+          "start_line": 5,
+          "language": "TypeScript"
+        },
+        "relation": "HANDLES_ROUTE",
+        "direction": "in",
+        "depth": 1
+      },
+      {
+        "endpoint": {
+          "id": "redirect-test",
+          "name": "redirect_is_rate_limited_test",
+          "qualified_name": "redirect_is_rate_limited_test",
+          "kind": "function",
+          "file_path": "test/redirect.test.ts",
+          "start_line": 15,
+          "language": "TypeScript"
+        },
+        "relation": "CALLS",
+        "direction": "in",
+        "depth": 1
+      }
+    ]
+  },
+  "callees": {
+    "total": 1,
+    "entries": [
+      {
+        "endpoint": {
+          "id": "ratelimiter-take",
+          "name": "take",
+          "qualified_name": "TokenBucketRateLimiter.take",
+          "kind": "method",
+          "file_path": "src/service/rate-limit.ts",
+          "start_line": 14,
+          "language": "TypeScript"
+        },
+        "relation": "CALLS",
+        "direction": "out",
+        "depth": 1
+      }
+    ]
+  },
+  "type_consumers": { "total": 0, "entries": [] },
+  "data_flows": { "total": 0, "entries": [] },
+  "co_changes": { "total": 0, "entries": [] },
+  "siblings": { "total": 0, "entries": [] }
+}

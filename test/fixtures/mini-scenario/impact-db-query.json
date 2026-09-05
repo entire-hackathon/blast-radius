@@ -1,0 +1,91 @@
+{
+  "format_version": 1,
+  "query": "Database.query",
+  "file": "src/db/database.ts",
+  "line": 41,
+  "disambiguation_required": false,
+  "focus": {
+    "id": "db-query",
+    "name": "query",
+    "qualified_name": "Database.query",
+    "kind": "method",
+    "file_path": "src/db/database.ts",
+    "start_line": 41,
+    "language": "TypeScript"
+  },
+  "callers": {
+    "total": 3,
+    "direct": 2,
+    "transitive": 1,
+    "entries": [
+      {
+        "endpoint": {
+          "id": "linkrepo-byid",
+          "name": "byId",
+          "qualified_name": "LinkRepo.byId",
+          "kind": "method",
+          "file_path": "src/repo/link-repo.ts",
+          "start_line": 8,
+          "language": "TypeScript"
+        },
+        "relation": "CALLS",
+        "direction": "in",
+        "depth": 1,
+        "call_site": { "file_path": "src/repo/link-repo.ts", "line": 12 }
+      },
+      {
+        "endpoint": {
+          "id": "linkrepo-save",
+          "name": "save",
+          "qualified_name": "LinkRepo.save",
+          "kind": "method",
+          "file_path": "src/repo/link-repo.ts",
+          "start_line": 20,
+          "language": "TypeScript"
+        },
+        "relation": "CALLS",
+        "direction": "in",
+        "depth": 1,
+        "call_site": { "file_path": "src/repo/link-repo.ts", "line": 24 }
+      },
+      {
+        "endpoint": {
+          "id": "db-query-test",
+          "name": "database_query_options_test",
+          "qualified_name": "database_query_options_test",
+          "kind": "function",
+          "file_path": "test/database.test.ts",
+          "start_line": 30,
+          "language": "TypeScript"
+        },
+        "relation": "CALLS",
+        "direction": "in",
+        "depth": 2,
+        "via": "LinkRepo.byId"
+      }
+    ]
+  },
+  "callees": { "total": 0, "entries": [] },
+  "type_consumers": {
+    "total": 1,
+    "entries": [
+      {
+        "endpoint": {
+          "id": "query-options",
+          "name": "QueryOptions",
+          "qualified_name": "QueryOptions",
+          "kind": "interface",
+          "file_path": "src/db/types.ts",
+          "start_line": 3,
+          "language": "TypeScript"
+        },
+        "relation": "USES_TYPE",
+        "direction": "in",
+        "depth": 1
+      }
+    ]
+  },
+  "data_flows": { "total": 0, "entries": [] },
+  "co_changes": { "total": 0, "entries": [] },
+  "siblings": { "total": 0, "entries": [] }
+}
