@@ -221,7 +221,16 @@ export class MarkdownRenderer implements Renderer {
       "  classDef more fill:#f6f8fa,stroke:#d0d7de,color:#57606a;",
       "```",
     );
-    return lines.join("\n");
+
+    const body = lines.join("\n");
+    const legend = [
+      body.includes(":::finding") ? "🔴 flagged — outside the stated intent" : "",
+      body.includes(":::changed") ? "🟡 changed, in scope" : "",
+      body.includes(":::caller") ? "⬜ caller (unchanged, in the radius)" : "",
+      body.includes(":::test") ? "🟢 covering test" : "",
+    ].filter(Boolean);
+
+    return `${body}\n<sub>${legend.join("  ·  ")} · arrow = calls / depends on</sub>`;
   }
 
   private checkpointNote(r: AnalysisReport): string {

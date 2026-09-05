@@ -31,6 +31,13 @@ describe("MarkdownRenderer", () => {
     expect(body).toMatch(/n\d+ --> n\d+/); // at least one edge
   });
 
+  it("puts a colour legend under the mermaid diagram", () => {
+    const body = new MarkdownRenderer().render(sampleReport()).body;
+    expect(body).toContain("🔴 flagged");
+    expect(body).toContain("🟢 covering test");
+    expect(body).toContain("arrow = calls / depends on");
+  });
+
   it("omits the diagram when disabled or when the radius has no callers", () => {
     const body = new MarkdownRenderer({ diagram: false }).render(sampleReport()).body;
     expect(body).not.toContain("```mermaid");
