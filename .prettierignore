@@ -5,3 +5,4 @@ fixtures/
 test/fixtures/
 test/**/__snapshots__/
 package-lock.json
+docs/pitch.html
