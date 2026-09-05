@@ -31,10 +31,10 @@ inputs:
     description: "Upsert the report as a PR comment."
     required: false
     default: "true"
-  blast-radius-ref:
-    description: "npm spec or github: spec for the CLI (default: this action's repo@version)."
+  dependents-threshold:
+    description: "Wide-reaching-change threshold."
     required: false
-    default: "github:entire-hackathon/blast-radius"
+    default: ""
 
 runs:
   using: "composite"
@@ -44,6 +44,11 @@ runs:
       with:
         go-version: "1.26"
         cache: false
+
+    - name: Set up Node
+      uses: actions/setup-node@v4
+      with:
+        node-version: "22"
 
     - name: Restore entire-graph binary
       id: cache-eg
@@ -64,9 +69,13 @@ runs:
         mkdir -p ~/.local/bin
         mv "$tmp/entire-graph" ~/.local/bin/entire-graph
 
-    - name: Add entire-graph to PATH
+    - name: Build the CLI
       shell: bash
-      run: echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+      run: |
+        set -euo pipefail
+        cd "$GITHUB_ACTION_PATH"
+        npm ci --no-audit --no-fund
+        npm run build
 
     - name: Run Blast Radius
       shell: bash
@@ -74,18 +83,20 @@ runs:
         GH_TOKEN: ${{ github.token }}
       run: |
         set -euo pipefail
-        args=(review --repo . --graph-head)
+        export PATH="$HOME/.local/bin:$PATH"
+        args=(review --repo "$GITHUB_WORKSPACE" --graph-head)
         [ -n "${{ inputs.base }}" ] && args+=(--base "${{ inputs.base }}")
         [ -n "${{ inputs.head }}" ] && args+=(--head "${{ inputs.head }}")
         args+=(--intent-source "${{ inputs.intent-source }}")
+        [ -n "${{ inputs.dependents-threshold }}" ] && args+=(--dependents-threshold "${{ inputs.dependents-threshold }}")
         args+=(--format markdown)
         [ "${{ inputs.comment }}" = "true" ] && args+=(--comment)
         [ "${{ inputs.upload-sarif }}" = "true" ] && args+=(--format sarif --sarif-out "$RUNNER_TEMP/blast-radius.sarif")
         [ "${{ inputs.fail-on-findings }}" = "true" ] && args+=(--fail-on-findings)
-        npx --yes "${{ inputs.blast-radius-ref }}" "${args[@]}"
+        node "$GITHUB_ACTION_PATH/dist/cli.js" "${args[@]}"
 
     - name: Upload SARIF
-      if: inputs.upload-sarif == 'true'
+      if: inputs.upload-sarif == 'true' && hashFiles(format('{0}/blast-radius.sarif', runner.temp)) != ''
       uses: github/codeql-action/upload-sarif@v3
       with:
         sarif_file: ${{ runner.temp }}/blast-radius.sarif
