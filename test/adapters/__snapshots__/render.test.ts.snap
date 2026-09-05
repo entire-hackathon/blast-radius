@@ -24,9 +24,8 @@ flowchart LR
   classDef changed fill:#fff3d4,stroke:#d4a72c,color:#7a5c00;
   classDef caller fill:#eef2f6,stroke:#8c959f,color:#1f2328;
   classDef test fill:#e6f4ea,stroke:#4c9a5f,color:#1a4d2e;
-  classDef more fill:#f6f8fa,stroke:#d0d7de,color:#57606a;
 \`\`\`
-<sub>🟥 changed — flagged, outside the stated intent  ·  🟨 changed — in scope  ·  ⬜ not changed — calls the change, so may be affected  ·  🟩 not changed — a test that covers the change<br>arrow: A → B means A calls / depends on B</sub>
+<sub>🟥 changed — flagged, outside the stated intent  ·  🟨 changed — in scope  ·  ⬜ not changed — calls the change, so may be affected  ·  🟩 not changed — a test that covers the change<br>arrow: A → B means A calls B · call paths only — 2 changed symbol(s) + 3 of the 3-node blast radius. Callees, types, co-change files &amp; siblings are in the “Full blast radius” table below.</sub>
 
 ### ⚠️ Scope check — 1 change(s) look outside the ask
 

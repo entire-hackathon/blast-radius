@@ -138,13 +138,15 @@ export class MarkdownRenderer implements Renderer {
   }
 
   /**
-   * A Mermaid flowchart: changed symbols in the centre (red = flagged, amber =
-   * clean), with the callers that reach them fanned out to the left. This is
-   * the graph the whole tool runs on, shown directly.
+   * A Mermaid flowchart of the call & type graph around the change: changed
+   * symbols in the centre (red = flagged, amber = in scope), callers fanned to
+   * the left, callees and type consumers to the right. Co-change files and
+   * siblings are context, not structure, so they stay in the table — the
+   * caption says how many nodes are shown of the full radius.
    */
   private diagram(r: AnalysisReport): string | null {
     if (this.opts.diagram === false) return null;
-    const cap = this.opts.diagramMaxNodes ?? 16;
+    const cap = this.opts.diagramMaxNodes ?? 18;
 
     const changedNames = new Set(r.changedSymbols.map((c) => c.ref.qualifiedName));
     const changed = r.changedSymbols.filter((c) => {
@@ -191,26 +193,24 @@ export class MarkdownRenderer implements Renderer {
       }
     }
 
-    const shownCallers = new Set<string>();
+    let callersShown = 0;
+    const seen = new Set<string>();
     for (const n of callers) {
-      if (count >= cap) {
-        lines.push(`  more["+ ${callers.length - shownCallers.size} more callers…"]:::more`);
-        break;
-      }
+      if (count >= cap) break;
       const key = n.ref.qualifiedName;
-      if (shownCallers.has(key)) continue;
-      shownCallers.add(key);
+      if (seen.has(key)) continue;
       const target =
         n.via.length > 0 && id.has(n.via[n.via.length - 1]!)
           ? n.via[n.via.length - 1]!
           : n.origins[0];
       if (!target || !id.has(target)) continue;
+      seen.add(key);
       if (!id.has(key)) {
-        const cls = n.isTest ? "test" : "caller";
-        lines.push(`  ${id.for(key)}["${mermaidLabel(key)}"]:::${cls}`);
+        lines.push(`  ${id.for(key)}["${mermaidLabel(key)}"]:::${n.isTest ? "test" : "caller"}`);
         count++;
       }
       lines.push(`  ${id.for(key)} --> ${id.for(target)}`);
+      callersShown++;
     }
 
     lines.push(
@@ -218,7 +218,6 @@ export class MarkdownRenderer implements Renderer {
       "  classDef changed fill:#fff3d4,stroke:#d4a72c,color:#7a5c00;",
       "  classDef caller fill:#eef2f6,stroke:#8c959f,color:#1f2328;",
       "  classDef test fill:#e6f4ea,stroke:#4c9a5f,color:#1a4d2e;",
-      "  classDef more fill:#f6f8fa,stroke:#d0d7de,color:#57606a;",
       "```",
     );
 
@@ -230,7 +229,15 @@ export class MarkdownRenderer implements Renderer {
       body.includes(":::test") ? "🟩 not changed — a test that covers the change" : "",
     ].filter(Boolean);
 
-    return `${body}\n<sub>${legend.join("  ·  ")}<br>arrow: A → B means A calls / depends on B</sub>`;
+    // the diagram is the caller path only; be explicit about what it omits
+    const total = r.radiusSummary.totalNodes;
+    const changedCount = changed.length;
+    const note =
+      `call paths only — ${changedCount} changed symbol(s) + ${callersShown} of the ` +
+      `${total}-node blast radius. Callees, types, co-change files &amp; siblings are in the ` +
+      `“Full blast radius” table below.`;
+
+    return `${body}\n<sub>${legend.join("  ·  ")}<br>arrow: A → B means A calls B · ${note}</sub>`;
   }
 
   private checkpointNote(r: AnalysisReport): string {

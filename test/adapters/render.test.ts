@@ -31,11 +31,14 @@ describe("MarkdownRenderer", () => {
     expect(body).toMatch(/n\d+ --> n\d+/); // at least one edge
   });
 
-  it("puts a colour legend under the mermaid diagram", () => {
+  it("puts a colour legend + node-count note under the mermaid diagram", () => {
     const body = new MarkdownRenderer().render(sampleReport()).body;
     expect(body).toContain("🟥 changed — flagged");
     expect(body).toContain("🟩 not changed — a test");
-    expect(body).toContain("A calls / depends on B");
+    expect(body).toContain("A calls B");
+    // sample radius has 3 nodes total; the diagram is the caller path
+    expect(body).toContain("3-node blast radius");
+    expect(body).toContain("Full blast radius");
   });
 
   it("omits the diagram when disabled or when the radius has no callers", () => {
