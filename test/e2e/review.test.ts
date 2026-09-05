@@ -6,7 +6,7 @@ import { PrBodyIntentSource } from "../../src/adapters/intent/pr-body.js";
 import { MarkdownRenderer } from "../../src/adapters/render/markdown.js";
 import { JsonRenderer } from "../../src/adapters/render/json.js";
 import { defaultScopeCreepStrategy } from "../../src/domain/scope-creep/index.js";
-import { ok, type Result } from "../../src/domain/errors.js";
+import { BlastRadiusError, err, ok, type Result } from "../../src/domain/errors.js";
 import { runReview } from "../../src/app/review.js";
 import type { ReportSink } from "../../src/ports/report-sink.js";
 import type { RenderedReport } from "../../src/ports/renderer.js";
@@ -22,6 +22,13 @@ class CaptureSink implements ReportSink {
   async publish(r: RenderedReport): Promise<Result<void>> {
     this.last = r;
     return ok(undefined);
+  }
+}
+
+class FailingSink implements ReportSink {
+  readonly kind = "failing";
+  async publish(): Promise<Result<void>> {
+    return err(BlastRadiusError.sink("no permission"));
   }
 }
 
@@ -107,5 +114,38 @@ describe("runReview (e2e, fixture graph)", () => {
     // dependents-threshold still fires without intent (Database.query, 12 deps)
     expect(res.value.report.findings.some((f) => f.strategy.includes("dependents"))).toBe(true);
     expect(md.last?.body).toContain("Intent** — none found");
+  });
+
+  it("keeps going when one sink fails, as long as another succeeds", async () => {
+    const ok1 = new CaptureSink();
+    const res = await runReview(
+      {
+        graph: new FixtureGraphAdapter(fixtureDir),
+        intent: new PrBodyIntentSource(),
+        scopeCreep: defaultScopeCreepStrategy(),
+        outputs: [
+          { renderer: new MarkdownRenderer(), sink: new FailingSink() },
+          { renderer: new MarkdownRenderer(), sink: ok1 },
+        ],
+        log: () => {},
+      },
+      {
+        range: { base: "abc123", head: "def456" },
+        prContext: {
+          repoPath: ".",
+          base: "abc123",
+          head: "def456",
+          prNumber: 1,
+          prTitle: "x",
+          prBody: "y",
+          repoSlug: undefined,
+        },
+      },
+    );
+    expect(res.ok).toBe(true);
+    if (!res.ok) return;
+    expect(res.value.publishedTo).toEqual(["markdown→capture"]);
+    expect(res.value.sinkErrors).toEqual([{ sink: "failing", message: "no permission" }]);
+    expect(ok1.last).not.toBeNull();
   });
 });

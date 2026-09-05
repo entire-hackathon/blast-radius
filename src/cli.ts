@@ -57,22 +57,26 @@ program
     const head = opts.head ?? gh?.head ?? "HEAD";
 
     const outputs: OutputTarget[] = [];
-    for (const fmt of opts.format as string[]) {
+    const formats = new Set(opts.format as string[]);
+    if (opts.comment) formats.add("markdown");
+    if (opts.markdownOut) formats.add("markdown");
+    if (opts.jsonOut) formats.add("json");
+    if (opts.sarifOut) formats.add("sarif");
+
+    for (const fmt of formats) {
       if (fmt === "markdown") {
-        outputs.push({
-          format: "markdown",
-          to: opts.markdownOut ?? (opts.comment ? "pr-comment" : "stdout"),
-        });
+        // markdown can fan out to several targets at once
+        const targets = new Set<string>();
+        if (opts.markdownOut) targets.add(opts.markdownOut);
+        if (opts.comment) targets.add("pr-comment");
+        if (targets.size === 0) targets.add("stdout");
+        for (const to of targets) outputs.push({ format: "markdown", to });
       } else if (fmt === "json") {
         outputs.push({ format: "json", to: opts.jsonOut ?? "stdout" });
       } else if (fmt === "sarif") {
         outputs.push({ format: "sarif", to: opts.sarifOut ?? "blast-radius.sarif" });
       }
     }
-    if (opts.jsonOut && !outputs.some((o) => o.format === "json"))
-      outputs.push({ format: "json", to: opts.jsonOut });
-    if (opts.sarifOut && !outputs.some((o) => o.format === "sarif"))
-      outputs.push({ format: "sarif", to: opts.sarifOut });
 
     const log: Logger = opts.quiet
       ? () => {}
@@ -126,7 +130,10 @@ program
         return;
       }
 
-      log("info", `published: ${result.value.publishedTo.join(", ")}`);
+      log("info", `published: ${result.value.publishedTo.join(", ") || "(nothing)"}`);
+      for (const se of result.value.sinkErrors) {
+        process.stderr.write(`\n⚠ ${se.sink}: ${se.message}\n`);
+      }
       if (config.failOnFindings && result.value.hasFindings) {
         process.stderr.write(`\n✖ ${result.value.report.findings.length} scope finding(s)\n`);
         process.exitCode = 1;

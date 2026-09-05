@@ -13,7 +13,7 @@
  * Depends only on ports. The composition root supplies the implementations.
  */
 import { computeBlastRadius } from "../domain/blast-radius.js";
-import { type BlastRadiusError, isErr, ok, type Result, settle } from "../domain/errors.js";
+import { BlastRadiusError, err, isErr, ok, type Result, settle } from "../domain/errors.js";
 import type { AnalysisReport, RadiusNode } from "../domain/model.js";
 import { reportBuilder } from "../domain/report.js";
 import type { ScopeCreepStrategy } from "../domain/scope-creep/index.js";
@@ -47,6 +47,8 @@ export interface ReviewRequest {
 export interface ReviewOutcome {
   readonly report: AnalysisReport;
   readonly publishedTo: string[];
+  /** sinks that failed — a non-fatal partial result unless every sink failed. */
+  readonly sinkErrors: { sink: string; message: string }[];
   readonly hasFindings: boolean;
 }
 
@@ -106,15 +108,21 @@ export async function runReview(
 
   /* 7 — render + publish -------------------------------------- */
   const publishedTo: string[] = [];
+  const sinkErrors: { sink: string; message: string }[] = [];
   for (const { renderer, sink } of deps.outputs) {
     const rendered = renderer.render(report);
     const res = await sink.publish(rendered);
     if (isErr(res)) {
       log("error", `publish to ${sink.kind} failed: ${res.error.message}`);
-      return res;
+      sinkErrors.push({ sink: sink.kind, message: res.error.message });
+      continue;
     }
     publishedTo.push(`${renderer.format}→${sink.kind}`);
   }
+  // only fatal if nothing at all got out
+  if (publishedTo.length === 0 && sinkErrors.length > 0) {
+    return err(BlastRadiusError.sink(sinkErrors.map((e) => `${e.sink}: ${e.message}`).join("; ")));
+  }
 
-  return ok({ report, publishedTo, hasFindings: findings.length > 0 });
+  return ok({ report, publishedTo, sinkErrors, hasFindings: findings.length > 0 });
 }

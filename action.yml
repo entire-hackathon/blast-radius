@@ -89,11 +89,20 @@ runs:
         [ -n "${{ inputs.head }}" ] && args+=(--head "${{ inputs.head }}")
         args+=(--intent-source "${{ inputs.intent-source }}")
         [ -n "${{ inputs.dependents-threshold }}" ] && args+=(--dependents-threshold "${{ inputs.dependents-threshold }}")
-        args+=(--format markdown)
+        # always render markdown to a file (-> job summary), regardless of comment perms
+        args+=(--markdown-out "$RUNNER_TEMP/blast-radius.md")
         [ "${{ inputs.comment }}" = "true" ] && args+=(--comment)
-        [ "${{ inputs.upload-sarif }}" = "true" ] && args+=(--format sarif --sarif-out "$RUNNER_TEMP/blast-radius.sarif")
+        [ "${{ inputs.upload-sarif }}" = "true" ] && args+=(--sarif-out "$RUNNER_TEMP/blast-radius.sarif")
         [ "${{ inputs.fail-on-findings }}" = "true" ] && args+=(--fail-on-findings)
         node "$GITHUB_ACTION_PATH/dist/cli.js" "${args[@]}"
+
+    - name: Job summary
+      if: always()
+      shell: bash
+      run: |
+        if [ -f "$RUNNER_TEMP/blast-radius.md" ]; then
+          cat "$RUNNER_TEMP/blast-radius.md" >> "$GITHUB_STEP_SUMMARY"
+        fi
 
     - name: Upload SARIF
       if: inputs.upload-sarif == 'true' && hashFiles(format('{0}/blast-radius.sarif', runner.temp)) != ''
