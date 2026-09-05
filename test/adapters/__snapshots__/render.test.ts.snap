@@ -26,7 +26,7 @@ flowchart LR
   classDef test fill:#e6f4ea,stroke:#4c9a5f,color:#1a4d2e;
   classDef more fill:#f6f8fa,stroke:#d0d7de,color:#57606a;
 \`\`\`
-<sub>🔴 flagged — outside the stated intent  ·  🟡 changed, in scope  ·  ⬜ caller (unchanged, in the radius)  ·  🟢 covering test · arrow = calls / depends on</sub>
+<sub>🟥 flagged — outside the stated intent  ·  🟨 changed, in scope  ·  ⬜ caller (unchanged, in the radius)  ·  🟩 covering test · arrow = calls / depends on</sub>
 
 ### ⚠️ Scope check — 1 change(s) look outside the ask
 
