@@ -8,21 +8,24 @@ This plan is written so a fresh agent session can pick it up cold.
 
 ## 0. Status board
 
-| Phase                                 | State |
-| ------------------------------------- | ----- |
-| P0 Fixtures + scaffold                | ☐     |
-| P1 Domain model + pipeline harness    | ☐     |
-| P2 Blast radius stage                 | ☐     |
-| P3 Scope-creep strategies             | ☐     |
-| P4 Test selection                     | ☐     |
-| P5 Renderers (markdown/json/sarif)    | ☐     |
-| P6 Adapters (graph cli, intent, sink) | ☐     |
-| P7 CLI + composition root             | ☐     |
-| P8 GitHub Action + demo repo          | ☐     |
-| P9 Dogfood + snapshot lock            | ☐     |
-| P10 Pitch deck + recording            | ☐     |
+| Phase                                 | State                                          |
+| ------------------------------------- | ---------------------------------------------- |
+| P0 Fixtures + scaffold                | ✅                                             |
+| P1 Domain model + pipeline harness    | ✅                                             |
+| P2 Blast radius stage                 | ✅                                             |
+| P3 Scope-creep strategies             | ✅                                             |
+| P4 Test selection                     | ✅                                             |
+| P5 Renderers (markdown/json/sarif)    | ✅                                             |
+| P6 Adapters (graph cli, intent, sink) | ✅                                             |
+| P7 CLI + composition root             | ✅                                             |
+| P8 GitHub Action + demo repo          | ✅ (local; live wiring needs the GitHub repos) |
+| P9 Dogfood + snapshot lock            | ◐ README/tag done; live dogfood pending push   |
+| P10 Pitch deck + recording            | ☐                                              |
 
 Update the boxes as you go. Each phase ends with `npm test` green.
+As of the first build session: **66 tests green**, typecheck + eslint clean,
+`npm run build` produces a working `dist/cli.js`, and the demo scenario renders
+from **real** captured entire-graph JSON.
 
 ---
 
