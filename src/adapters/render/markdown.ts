@@ -224,10 +224,10 @@ export class MarkdownRenderer implements Renderer {
 
     const body = lines.join("\n");
     const legend = [
-      body.includes(":::finding") ? "🔴 flagged — outside the stated intent" : "",
-      body.includes(":::changed") ? "🟡 changed, in scope" : "",
+      body.includes(":::finding") ? "🟥 flagged — outside the stated intent" : "",
+      body.includes(":::changed") ? "🟨 changed, in scope" : "",
       body.includes(":::caller") ? "⬜ caller (unchanged, in the radius)" : "",
-      body.includes(":::test") ? "🟢 covering test" : "",
+      body.includes(":::test") ? "🟩 covering test" : "",
     ].filter(Boolean);
 
     return `${body}\n<sub>${legend.join("  ·  ")} · arrow = calls / depends on</sub>`;

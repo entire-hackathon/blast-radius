@@ -33,8 +33,8 @@ describe("MarkdownRenderer", () => {
 
   it("puts a colour legend under the mermaid diagram", () => {
     const body = new MarkdownRenderer().render(sampleReport()).body;
-    expect(body).toContain("🔴 flagged");
-    expect(body).toContain("🟢 covering test");
+    expect(body).toContain("🟥 flagged");
+    expect(body).toContain("🟩 covering test");
     expect(body).toContain("arrow = calls / depends on");
   });
 
