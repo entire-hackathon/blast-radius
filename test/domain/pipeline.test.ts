@@ -30,11 +30,7 @@ describe("chain", () => {
 
 describe("fanOut", () => {
   it("runs every branch on the same input and combines", () => {
-    const out = fanOut(
-      10,
-      [(n) => n + 1, (n) => n * 2, (n) => `${n}`],
-      (a, b, c) => ({ a, b, c }),
-    );
+    const out = fanOut(10, [(n) => n + 1, (n) => n * 2, (n) => `${n}`], (a, b, c) => ({ a, b, c }));
     expect(out).toEqual({ a: 11, b: 20, c: "10" });
   });
 });

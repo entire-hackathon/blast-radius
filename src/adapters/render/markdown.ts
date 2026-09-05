@@ -96,7 +96,8 @@ export class MarkdownRenderer implements Renderer {
       `**${s.totalNodes} node${s.totalNodes === 1 ? "" : "s"}**`,
       `${s.moduleCount} module${s.moduleCount === 1 ? "" : "s"}`,
     ];
-    if (s.serviceCount > 0) parts.push(`${s.serviceCount} service${s.serviceCount === 1 ? "" : "s"}`);
+    if (s.serviceCount > 0)
+      parts.push(`${s.serviceCount} service${s.serviceCount === 1 ? "" : "s"}`);
     parts.push(
       r.findings.length > 0
         ? `**${r.findings.length} scope finding${r.findings.length === 1 ? "" : "s"}**`
@@ -148,10 +149,7 @@ export class MarkdownRenderer implements Renderer {
       tp.coverageGaps.length === 0
         ? "covers every changed symbol"
         : `covers all but ${tp.coverageGaps.length}`;
-    const lines = [
-      `### 🧪 Recommended tests — ${tp.selected.length}${suite}, ${cover}`,
-      "",
-    ];
+    const lines = [`### 🧪 Recommended tests — ${tp.selected.length}${suite}, ${cover}`, ""];
     if (tp.command) {
       lines.push("```bash", tp.command, "```", "");
     }

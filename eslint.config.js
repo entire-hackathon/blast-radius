@@ -32,6 +32,10 @@ export default [
     },
     rules: {
       ...tseslint.configs.recommended.rules,
+      // tsc handles these far better than the core rules for TS sources
+      "no-undef": "off",
+      "no-redeclare": "off",
+      "no-unused-vars": "off",
       "@typescript-eslint/no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
       "@typescript-eslint/consistent-type-imports": "error",
       "boundaries/element-types": [

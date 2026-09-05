@@ -18,8 +18,8 @@ that radius against the **stated intent** of the change (the PR description, a
 linked issue, or an `Entire-Checkpoint` trailer) and flags anything touched
 that falls outside the original ask. It then ranks the affected tests by
 proximity in the graph and proposes a minimal-but-sufficient test set instead
-of "run everything". The reviewer gets one comment: *"This change touches 14
-nodes, 3 outside stated intent — here are the 6 tests that actually cover it"*,
+of "run everything". The reviewer gets one comment: _"This change touches 14
+nodes, 3 outside stated intent — here are the 6 tests that actually cover it"_,
 every claim linking back to the graph path that justifies it.
 
 It uses the graph as a **real dependency**, not a viewer: `diff`, `impact`,
@@ -30,16 +30,16 @@ a decision. Raw graph output is never shown on its own.
 
 ## 2. Design principles
 
-| Principle | How it shows up |
-| --- | --- |
-| **Hexagonal (Ports & Adapters)** | The domain core (`src/domain/`) has zero I/O. It depends only on interfaces declared in `src/ports/`. Every external system — the `entire-graph` binary, GitHub, git, the filesystem — is an adapter behind a port. |
-| **Dependency Inversion** | Core defines the interfaces it needs; adapters implement them. Nothing in `domain/` imports from `adapters/`. |
-| **Single composition root** | All wiring happens in `src/composition-root.ts`. No `new SomeAdapter()` scattered through the code. Swapping an implementation is a one-line change there. |
-| **Pure pipeline stages** | Analysis is a chain of pure functions `Stage<In, Out>` composed in `src/domain/pipeline.ts`. Each stage is unit-tested in isolation with plain objects. |
-| **Strategy pattern for judgement calls** | Scope-creep detection is a set of interchangeable `ScopeCreepStrategy` implementations combined by a `CompositeStrategy`. Adding or changing a heuristic never touches the pipeline. |
-| **Result types over exceptions** | Adapter calls that can fail (`binary missing`, `git error`, `network`) return `Result<T, BlastRadiusError>`. Exceptions do not cross the port boundary. |
-| **Validate at the boundary** | Every blob of external JSON (entire-graph output, GitHub API) is parsed through a `zod` schema the moment it enters. The domain only ever sees validated value objects. |
-| **DRY via shared value objects** | `Symbol`, `GraphNode`, `RadiusNode`, `IntentModel`, `Finding`, `TestCandidate` are declared once in `src/domain/model.ts` and reused everywhere. |
+| Principle                                | How it shows up                                                                                                                                                                                                     |
+| ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Hexagonal (Ports & Adapters)**         | The domain core (`src/domain/`) has zero I/O. It depends only on interfaces declared in `src/ports/`. Every external system — the `entire-graph` binary, GitHub, git, the filesystem — is an adapter behind a port. |
+| **Dependency Inversion**                 | Core defines the interfaces it needs; adapters implement them. Nothing in `domain/` imports from `adapters/`.                                                                                                       |
+| **Single composition root**              | All wiring happens in `src/composition-root.ts`. No `new SomeAdapter()` scattered through the code. Swapping an implementation is a one-line change there.                                                          |
+| **Pure pipeline stages**                 | Analysis is a chain of pure functions `Stage<In, Out>` composed in `src/domain/pipeline.ts`. Each stage is unit-tested in isolation with plain objects.                                                             |
+| **Strategy pattern for judgement calls** | Scope-creep detection is a set of interchangeable `ScopeCreepStrategy` implementations combined by a `CompositeStrategy`. Adding or changing a heuristic never touches the pipeline.                                |
+| **Result types over exceptions**         | Adapter calls that can fail (`binary missing`, `git error`, `network`) return `Result<T, BlastRadiusError>`. Exceptions do not cross the port boundary.                                                             |
+| **Validate at the boundary**             | Every blob of external JSON (entire-graph output, GitHub API) is parsed through a `zod` schema the moment it enters. The domain only ever sees validated value objects.                                             |
+| **DRY via shared value objects**         | `Symbol`, `GraphNode`, `RadiusNode`, `IntentModel`, `Finding`, `TestCandidate` are declared once in `src/domain/model.ts` and reused everywhere.                                                                    |
 
 ---
 
@@ -70,15 +70,15 @@ a decision. Raw graph output is never shown on its own.
 
 ### Stage contracts
 
-| Stage | Input | Output | Pure? | Port used |
-| --- | --- | --- | --- | --- |
-| `collectChangeSet` | `{base, head}` | `ChangeSet` (changed symbols + `dependents_count`) | no | `GraphProvider.diff` |
-| `computeBlastRadius` | `ChangeSet` | `BlastRadius` (deduped `RadiusNode[]`, bucketed by relation) | no | `GraphProvider.impact` per symbol |
-| `resolveIntent` | `PrContext` | `IntentModel` | no | `IntentSource.get` |
-| `detectScopeCreep` | `ChangeSet + IntentModel` | `Finding[]` | **yes** | — |
-| `selectTests` | `BlastRadius` | `TestPlan` (ranked `TestCandidate[]` + run command + coverage gaps) | **yes** | — |
-| `summarizeRadius` | `BlastRadius` | `RadiusSummary` (counts by module / service / relation) | **yes** | — |
-| `buildReport` | all of the above | `AnalysisReport` | **yes** | — (Builder) |
+| Stage                | Input                     | Output                                                              | Pure?   | Port used                         |
+| -------------------- | ------------------------- | ------------------------------------------------------------------- | ------- | --------------------------------- |
+| `collectChangeSet`   | `{base, head}`            | `ChangeSet` (changed symbols + `dependents_count`)                  | no      | `GraphProvider.diff`              |
+| `computeBlastRadius` | `ChangeSet`               | `BlastRadius` (deduped `RadiusNode[]`, bucketed by relation)        | no      | `GraphProvider.impact` per symbol |
+| `resolveIntent`      | `PrContext`               | `IntentModel`                                                       | no      | `IntentSource.get`                |
+| `detectScopeCreep`   | `ChangeSet + IntentModel` | `Finding[]`                                                         | **yes** | —                                 |
+| `selectTests`        | `BlastRadius`             | `TestPlan` (ranked `TestCandidate[]` + run command + coverage gaps) | **yes** | —                                 |
+| `summarizeRadius`    | `BlastRadius`             | `RadiusSummary` (counts by module / service / relation)             | **yes** | —                                 |
+| `buildReport`        | all of the above          | `AnalysisReport`                                                    | **yes** | — (Builder)                       |
 
 The three impure stages are thin: they call a port, validate the response, and
 map it to a value object. All judgement lives in the pure stages, which is what
@@ -165,7 +165,7 @@ export interface GraphProvider {
 
 // ports/intent-source.ts
 export interface IntentSource {
-  readonly name: string;            // "pr-body" | "github-issue" | "checkpoint-trailer"
+  readonly name: string; // "pr-body" | "github-issue" | "checkpoint-trailer"
   get(ctx: PrContext): Promise<Result<IntentModel | null, BlastRadiusError>>;
 }
 
@@ -189,6 +189,7 @@ test/offline fake. That is the definition of "done" for a port.
 ## 6. Algorithms (v1 — deliberately explainable)
 
 ### 6.1 Blast radius
+
 For each changed symbol from `diff`, call `impact --symbol <name> --file <path>
 --format json`. Union the `callers`, `callees`, `type_consumers`, `data_flows`,
 `co_changes`, `siblings` sections. Dedupe by `(file, symbol)` keeping the
@@ -196,10 +197,11 @@ shortest graph distance seen. Tag each node with the changed symbol(s) it
 derives from and the relation path.
 
 ### 6.2 Scope-creep detection (Strategy)
+
 `IntentModel.keywords` = significant tokens from intent text (identifiers,
 nouns), lowercased, stopworded, light-stemmed.
 
-- **KeywordOverlapStrategy** — for each *changed* symbol `S`:
+- **KeywordOverlapStrategy** — for each _changed_ symbol `S`:
   `tokens(S)` = camelCase/snake/`/`/`.`-split of qualified name + path.
   `overlap = |tokens(S) ∩ keywords| / |tokens(S)|`.
   Emit a `Finding` when `overlap < 0.15` **and** `S.dependents_count >= 3`.
@@ -213,6 +215,7 @@ relation path, the strategy name, and a severity. This is the verifiable
 evidence trail.
 
 ### 6.3 Test selection
+
 A `RadiusNode` is a **test** if its file matches configured test globs
 (`**/*.{test,spec}.*`, `**/*_test.go`, `**/test_*.py`, `**/tests/**`) or its
 name matches `^Test|^test_|_test$`.
@@ -225,6 +228,7 @@ Run command synthesised per detected stack:
 `pytest <file>::<name>`.
 
 ### 6.4 Radius summary
+
 Counts: total nodes, distinct files, distinct top-level modules (first path
 segment, configurable), distinct services (from `SERVICE`/`HANDLES_ROUTE`
 relations when present), and a per-relation breakdown.
@@ -233,11 +237,11 @@ relations when present), and a per-relation breakdown.
 
 ## 7. Output surfaces
 
-| Format | Consumer | Notes |
-| --- | --- | --- |
-| Markdown | human reviewer (PR comment) | headline metrics line, scope table, `<details>` test plan with copy-paste command, `<details>` full radius. Every row anchors to an evidence block. |
-| JSON | agents / scripts | the full `AnalysisReport` value object, schema-versioned |
-| SARIF | GitHub code-scanning tab / any SARIF tool | scope findings as results; makes the check a first-class CI signal and is a ready hedge for a "machine-verifiable output" curveball |
+| Format   | Consumer                                  | Notes                                                                                                                                               |
+| -------- | ----------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Markdown | human reviewer (PR comment)               | headline metrics line, scope table, `<details>` test plan with copy-paste command, `<details>` full radius. Every row anchors to an evidence block. |
+| JSON     | agents / scripts                          | the full `AnalysisReport` value object, schema-versioned                                                                                            |
+| SARIF    | GitHub code-scanning tab / any SARIF tool | scope findings as results; makes the check a first-class CI signal and is a ready hedge for a "machine-verifiable output" curveball                 |
 
 The **GitHubCommentSink upserts**: it finds its own previous comment (marker
 `<!-- blast-radius -->`) and edits it, so re-runs don't spam the PR.
@@ -251,7 +255,7 @@ The **GitHubCommentSink upserts**: it finds its own previous comment (marker
 1. `actions/setup-go` + `actions/cache` (key: entire-graph version) → build or
    restore the `entire-graph` binary.
 2. `npx github:<owner>/blast-radius review --base … --head … --format markdown
-   --out br.md --format sarif --sarif-out br.sarif`
+--out br.md --format sarif --sarif-out br.sarif`
 3. `gh pr comment --body-file br.md` (token: `github.token`)
 4. `github/codeql-action/upload-sarif` (optional, `if: inputs.upload-sarif`)
 
@@ -266,17 +270,17 @@ The Noon Curve Ball drops a track-specific constraint at 12:00 IST. The design
 is built so that most plausible constraints are **one adapter or one strategy**,
 never a rewrite.
 
-| If the curveball is… | The change is… | Files touched |
-| --- | --- | --- |
-| "support GitLab / Bitbucket" | new `ReportSink` + `IntentSource` adapter | `adapters/sink/`, `adapters/intent/`, `composition-root.ts` |
-| "another language" | entire-graph already parses it; widen test globs in config | `app/config.ts` |
-| "machine-verifiable / SARIF / JUnit output" | already have JSON + SARIF; add a renderer | `adapters/render/` |
-| "run as an MCP / agent tool" | `review()` is a pure use-case; add an MCP entry point beside `cli.ts` | new `src/mcp.ts`, `composition-root.ts` |
-| "intent from Jira / Linear / Checkpoint only" | new `IntentSource`; `CompositeIntentSource` already sequences them | `adapters/intent/` |
-| "new scoring dimension / different scope rule" | new `Stage` or new `ScopeCreepStrategy` | `domain/scope-creep/` or `domain/pipeline.ts` |
-| "must work fully offline" | entire-graph is no-egress; fall back to `FileSink`, skip `gh` | `composition-root.ts` (config flag already there) |
-| "pre-commit / local hook" | `review()` callable from a hook entry point | new `src/hook.ts` |
-| "explain WHY each node is in the radius" | relation path is already captured per node; extend the renderer | `adapters/render/markdown.ts` |
+| If the curveball is…                           | The change is…                                                        | Files touched                                               |
+| ---------------------------------------------- | --------------------------------------------------------------------- | ----------------------------------------------------------- |
+| "support GitLab / Bitbucket"                   | new `ReportSink` + `IntentSource` adapter                             | `adapters/sink/`, `adapters/intent/`, `composition-root.ts` |
+| "another language"                             | entire-graph already parses it; widen test globs in config            | `app/config.ts`                                             |
+| "machine-verifiable / SARIF / JUnit output"    | already have JSON + SARIF; add a renderer                             | `adapters/render/`                                          |
+| "run as an MCP / agent tool"                   | `review()` is a pure use-case; add an MCP entry point beside `cli.ts` | new `src/mcp.ts`, `composition-root.ts`                     |
+| "intent from Jira / Linear / Checkpoint only"  | new `IntentSource`; `CompositeIntentSource` already sequences them    | `adapters/intent/`                                          |
+| "new scoring dimension / different scope rule" | new `Stage` or new `ScopeCreepStrategy`                               | `domain/scope-creep/` or `domain/pipeline.ts`               |
+| "must work fully offline"                      | entire-graph is no-egress; fall back to `FileSink`, skip `gh`         | `composition-root.ts` (config flag already there)           |
+| "pre-commit / local hook"                      | `review()` callable from a hook entry point                           | new `src/hook.ts`                                           |
+| "explain WHY each node is in the radius"       | relation path is already captured per node; extend the renderer       | `adapters/render/markdown.ts`                               |
 
 Keep this table honest — update it once the real constraint is known.
 
@@ -290,7 +294,7 @@ Keep this table honest — update it once the real constraint is known.
   fixtures; `FixtureGraphAdapter` is itself the test double. Intent adapters
   against recorded `gh` JSON. Sinks against a spy.
 - **E2E (e2e/):** `fixtures/scenarios/*` — each scenario is `{ changeSet,
-  impacts, intent }` in, and a snapshot of the rendered Markdown out. This is
+impacts, intent }` in, and a snapshot of the rendered Markdown out. This is
   the regression net for the demo.
 - **Dogfood:** `.github/workflows/blast-radius.yml` runs the real thing on this
   repo's own PRs. If our own PR comment looks wrong, we see it before the judges.

@@ -11,9 +11,9 @@ import { KeywordOverlapStrategy } from "./keyword-overlap.js";
 import { CompositeStrategy, type ScopeCreepStrategy } from "./strategy.js";
 
 export interface ScopeCreepConfig {
-  readonly keywordMaxOverlap?: number;
-  readonly keywordMinDependents?: number;
-  readonly dependentsThreshold?: number;
+  readonly keywordMaxOverlap?: number | undefined;
+  readonly keywordMinDependents?: number | undefined;
+  readonly dependentsThreshold?: number | undefined;
 }
 
 /** The default detector: keyword-overlap + wide-reaching-change, merged. */

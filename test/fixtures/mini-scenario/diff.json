@@ -8,7 +8,12 @@
       "status": "M",
       "language": "TypeScript",
       "changes": [
-        { "type": "body_changed", "kind": "module", "name": "src/db/database.ts", "dependents_count": 0 },
+        {
+          "type": "body_changed",
+          "kind": "module",
+          "name": "src/db/database.ts",
+          "dependents_count": 0
+        },
         {
           "type": "signature_changed",
           "kind": "method",

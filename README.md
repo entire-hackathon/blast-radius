@@ -21,7 +21,7 @@ Two things happen on almost every pull request:
    show that. The reviewer approves on vibes.
 2. **CI runs everything.** No signal about which tests actually exercise the
    changed code, so the whole suite runs on every push — slow feedback, wasted
-   minutes, and *still* no confidence the right paths were covered.
+   minutes, and _still_ no confidence the right paths were covered.
 
 And a quieter one: **the change quietly grew.** The ticket said "add rate
 limiting to one endpoint"; the PR also refactored a database signature. Nobody
@@ -43,19 +43,22 @@ changed symbols ──▶ blast radius ──▶ ┌─ scope check vs stated in
 It posts a single comment like:
 
 > ## 🧨 Blast Radius
+>
 > **14 nodes** · 4 modules · 3 services · **3 scope findings** · **6 tests (2 gaps)**
 >
-> **Scope check** — intent: *"add rate limiting to the redirect endpoint"* (source: `Entire-Checkpoint` trailer)
+> **Scope check** — intent: _"add rate limiting to the redirect endpoint"_ (source: `Entire-Checkpoint` trailer)
 >
-> | | Changed symbol | Why flagged | Dependents |
-> |--|--|--|--|
-> | 🔴 | `Database.query` `src/db/database.ts:41` | not referenced in intent · 9 dependents | 9 |
-> | 🟠 | `LinkRepo.byId` `src/repo/link-repo.ts:12` | not referenced in intent · 4 dependents | 4 |
+> |     | Changed symbol                             | Why flagged                             | Dependents |
+> | --- | ------------------------------------------ | --------------------------------------- | ---------- |
+> | 🔴  | `Database.query` `src/db/database.ts:41`   | not referenced in intent · 9 dependents | 9          |
+> | 🟠  | `LinkRepo.byId` `src/repo/link-repo.ts:12` | not referenced in intent · 4 dependents | 4          |
 >
 > **Recommended tests (6)** — covers all but 2 changed symbols
+>
 > ```bash
 > npx vitest run test/redirect.test.ts test/rate-limit.test.ts test/link-repo.test.ts -t "redirect|rate|byId"
 > ```
+>
 > <details><summary>Full blast radius (14 nodes)</summary> … </details>
 
 Every row links to an **evidence block** that names the exact graph path
@@ -65,12 +68,12 @@ trusting it.
 
 ## How it uses the graph (not just displaying it)
 
-| Graph command | What Blast Radius does with the output |
-| --- | --- |
-| `entire-graph diff --base A --head B --json` | the set of changed symbols and each one's `dependents_count` |
-| `entire-graph impact --symbol S --file F --json` | per-symbol callers / callees / type consumers / data flows / co-change files / siblings — unioned and deduped into the radius |
-| `entire-graph neighbors --symbol S --relation CALLS --direction in` | distance refinement for test ranking |
-| `Entire-Checkpoint:` git trailer | resolves the change back to its originating session so the *stated intent* is the real captured prompt, not a guess |
+| Graph command                                                       | What Blast Radius does with the output                                                                                        |
+| ------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| `entire-graph diff --base A --head B --json`                        | the set of changed symbols and each one's `dependents_count`                                                                  |
+| `entire-graph impact --symbol S --file F --json`                    | per-symbol callers / callees / type consumers / data flows / co-change files / siblings — unioned and deduped into the radius |
+| `entire-graph neighbors --symbol S --relation CALLS --direction in` | distance refinement for test ranking                                                                                          |
+| `Entire-Checkpoint:` git trailer                                    | resolves the change back to its originating session so the _stated intent_ is the real captured prompt, not a guess           |
 
 The raw output is never shown on its own. It is joined, scored, and turned into
 a decision (approve / look here / run these) — which is the point of the track.
@@ -83,7 +86,7 @@ npm install -g blast-radius        # or: npx blast-radius <cmd>
 
 Requires **Node ≥ 20**. For live analysis it also needs the `entire-graph`
 binary on `PATH` (the GitHub Action builds it for you). For local development
-and demos you don't need it — see *Fixture mode*.
+and demos you don't need it — see _Fixture mode_.
 
 ## Usage
 

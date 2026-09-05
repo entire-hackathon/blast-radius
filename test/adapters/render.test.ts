@@ -17,7 +17,9 @@ describe("MarkdownRenderer", () => {
 
   it("headline names nodes, findings and tests", () => {
     const body = new MarkdownRenderer().render(sampleReport()).body;
-    expect(body).toContain("**3 nodes** · 2 modules · 1 service · **1 scope finding** · **2 tests**");
+    expect(body).toContain(
+      "**3 nodes** · 2 modules · 1 service · **1 scope finding** · **2 tests**",
+    );
   });
 
   it("degrades gracefully with no intent", () => {

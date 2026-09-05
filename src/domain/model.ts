@@ -24,13 +24,7 @@ export interface SymbolRef {
 }
 
 export type ChangeType =
-  | "added"
-  | "removed"
-  | "renamed"
-  | "moved"
-  | "signature_changed"
-  | "body_changed"
-  | "unknown";
+  "added" | "removed" | "renamed" | "moved" | "signature_changed" | "body_changed" | "unknown";
 
 export interface ChangedSymbol {
   readonly ref: SymbolRef;
@@ -64,12 +58,7 @@ export type RadiusRelation =
   | "OTHER";
 
 export type RadiusSection =
-  | "callers"
-  | "callees"
-  | "type_consumers"
-  | "data_flows"
-  | "co_changes"
-  | "siblings";
+  "callers" | "callees" | "type_consumers" | "data_flows" | "co_changes" | "siblings";
 
 export interface RadiusNode {
   readonly ref: SymbolRef;

@@ -1,1 +1,463 @@
-{"format_version":1,"repo_root":"/src","commit":"e8c11a33245ff2744af5978b257140c4949f2443","tree":"2e06acdde283eb296dd4c873013b9894b6a4c89e","profile":"full","query":"parseCommonFlags","depth":2,"index_cache_hit":false,"index_latency_ms":140090,"query_latency_ms":69,"total_latency_ms":140160,"focus_matches_total":1,"disambiguation_required":false,"focus":{"id":"gh/entireio/entire-graph:Go:internal/cli/root.go:function:parseCommonFlags","name":"parseCommonFlags","qualified_name":"parseCommonFlags","kind":"function","file_path":"internal/cli/root.go","start_line":729,"end_line":763,"language":"Go"},"callers":{"total":9,"direct":3,"transitive":6,"in":3,"entries":[{"endpoint":{"id":"gh/entireio/entire-graph:Go:internal/cli/root.go:function:runCommit","name":"runCommit","qualified_name":"runCommit","kind":"function","file_path":"internal/cli/root.go","start_line":765,"end_line":792,"language":"Go"},"relation":"CALLS","direction":"in","depth":1,"call_site":{"file_path":"internal/cli/root.go","line":766}},{"endpoint":{"id":"gh/entireio/entire-graph:Go:internal/cli/root.go:function:runCheckpoint","name":"runCheckpoint","qualified_name":"runCheckpoint","kind":"function","file_path":"internal/cli/root.go","start_line":794,"end_line":817,"language":"Go"},"relation":"CALLS","direction":"in","depth":1,"call_site":{"file_path":"internal/cli/root.go","line":795}},{"endpoint":{"id":"gh/entireio/entire-graph:Go:internal/cli/root.go:function:parseDiffFlags","name":"parseDiffFlags","qualified_name":"parseDiffFlags","kind":"function","file_path":"internal/cli/root.go","start_line":874,"end_line":925,"language":"Go"},"relation":"CALLS","direction":"in","depth":1,"call_site":{"file_path":"internal/cli/root.go","line":888}},{"endpoint":{"id":"gh/entireio/entire-graph:Go:internal/cli/agentguide_test.go:function:parserAcceptsFlag","name":"parserAcceptsFlag","qualified_name":"parserAcceptsFlag","kind":"function","file_path":"internal/cli/agentguide_test.go","start_line":296,"end_line":330,"language":"Go"},"relation":"CALLS","direction":"in","depth":2,"via":"parseDiffFlags","call_site":{"file_path":"internal/cli/agentguide_test.go","line":320}},{"endpoint":{"id":"gh/entireio/entire-graph:Go:internal/cli/root.go:function:Run","name":"Run","qualified_name":"Run","kind":"function","file_path":"internal/cli/root.go","start_line":43,"end_line":127,"language":"Go"},"relation":"CALLS","direction":"in","depth":2,"via":"runCheckpoint","call_site":{"file_path":"internal/cli/root.go","line":77}},{"endpoint":{"id":"gh/entireio/entire-graph:Go:internal/cli/root.go:function:runDiff","name":"runDiff","qualified_name":"runDiff","kind":"function","file_path":"internal/cli/root.go","start_line":927,"end_line":941,"language":"Go"},"relation":"CALLS","direction":"in","depth":2,"via":"parseDiffFlags","call_site":{"file_path":"internal/cli/root.go","line":928}},{"endpoint":{"id":"gh/entireio/entire-graph:Go:internal/cli/root_test.go:function:TestParseDiffFlagsSeparatesUnknownFlagsFromPaths","name":"TestParseDiffFlagsSeparatesUnknownFlagsFromPaths","qualified_name":"TestParseDiffFlagsSeparatesUnknownFlagsFromPaths","kind":"function","file_path":"internal/cli/root_test.go","start_line":1348,"end_line":1424,"language":"Go"},"relation":"CALLS","direction":"in","depth":2,"via":"parseDiffFlags","call_site":{"file_path":"internal/cli/root_test.go","line":1406}},{"endpoint":{"id":"gh/entireio/entire-graph:Go:internal/cli/root_test.go:function:TestParseDiffFlagsRequiresRevisionValues","name":"TestParseDiffFlagsRequiresRevisionValues","qualified_name":"TestParseDiffFlagsRequiresRevisionValues","kind":"function","file_path":"internal/cli/root_test.go","start_line":1426,"end_line":1432,"language":"Go"},"relation":"CALLS","direction":"in","depth":2,"via":"parseDiffFlags","call_site":{"file_path":"internal/cli/root_test.go","line":1428}},{"endpoint":{"id":"gh/entireio/entire-graph:Go:internal/cli/root_test.go:function:TestParseDiffFlagsRejectsOptionShapedRevision","name":"TestParseDiffFlagsRejectsOptionShapedRevision","qualified_name":"TestParseDiffFlagsRejectsOptionShapedRevision","kind":"function","file_path":"internal/cli/root_test.go","start_line":1452,"end_line":1467,"language":"Go"},"relation":"CALLS","direction":"in","depth":2,"via":"parseDiffFlags","call_site":{"file_path":"internal/cli/root_test.go","line":1459,"additional_sites":1}}]},"callees":{"total":3,"out":3,"entries":[{"endpoint":{"id":"external:symbol:errors.New","name":"New","qualified_name":"errors.New","kind":"symbol","external":true},"relation":"CALLS","direction":"out","depth":1},{"endpoint":{"id":"external:symbol:fmt.Errorf","name":"Errorf","qualified_name":"fmt.Errorf","kind":"symbol","external":true},"relation":"CALLS","direction":"out","depth":1},{"endpoint":{"id":"external:symbol:strconv.Atoi","name":"Atoi","qualified_name":"strconv.Atoi","kind":"symbol","external":true},"relation":"CALLS","direction":"out","depth":1}]},"type_consumers":{"total":2,"out":2,"entries":[{"endpoint":{"id":"gh/entireio/entire-graph:Go:internal/cli/root.go:type:commonFlags","name":"commonFlags","qualified_name":"commonFlags","kind":"type","file_path":"internal/cli/root.go","start_line":572,"end_line":579,"language":"Go"},"relation":"RETURNS_TYPE","direction":"out","depth":1},{"endpoint":{"id":"gh/entireio/entire-graph:Go:internal/cli/root.go:type:commonFlags","name":"commonFlags","qualified_name":"commonFlags","kind":"type","file_path":"internal/cli/root.go","start_line":572,"end_line":579,"language":"Go"},"relation":"USES_TYPE","direction":"out","depth":1}]},"data_flows":{"total":2,"direct":2,"in":2,"entries":[{"endpoint":{"id":"gh/entireio/entire-graph:Go:internal/cli/root.go:function:runCommit","name":"runCommit","qualified_name":"runCommit","kind":"function","file_path":"internal/cli/root.go","start_line":765,"end_line":792,"language":"Go"},"relation":"DATA_FLOWS","direction":"in","depth":1},{"endpoint":{"id":"gh/entireio/entire-graph:Go:internal/cli/root.go:function:runCheckpoint","name":"runCheckpoint","qualified_name":"runCheckpoint","kind":"function","file_path":"internal/cli/root.go","start_line":794,"end_line":817,"language":"Go"},"relation":"DATA_FLOWS","direction":"in","depth":1}]},"co_changes":{"total":0,"entries":[]},"siblings":{"total":0,"entries":[]},"warnings":[{"code":"W_WORKTREE_SNAPSHOT","severity":"warning","effect_on_semantic_completeness":"snapshot records are read from the working tree because --worktree was requested"},{"code":"W_DATA_FLOW_EVIDENCE_UNMERGED","severity":"info","effect_on_semantic_completeness":"each DATA_FLOWS relation carries every flow found by the symbol that produced it; on these edges a second symbol justified the same edge and its flows were dropped, so the evidence array explains the edge from one side only. The affected edges are counted, not identified: each record had already been written when its second producer appeared, so none of them can be marked individually and a consumer cannot tell from a relation alone whether it is one of them","detail":"5 DATA_FLOWS edge(s) were justified by more than one symbol, typically mutual recursion where one side forwards a parameter and the other returns a call; the relation, its confidence and its reason are unaffected. Independent of EVIDENCE_TRUNCATED: one edge can be both, neither supersedes the other, and this count includes edges that were also truncated"}],"partial_failures":[{"code":"E_PARSE_ERROR","severity":"warning","file_path":"internal/sem/grammars/csharp/tree_sitter/array.h","effect_on_semantic_completeness":"file parsed with syntax errors; semantic facts may be incomplete","detail":"tree-sitter syntax error nodes present: error ERROR at line 160 column 21 near \"Array\""},{"code":"E_PARSE_ERROR","severity":"warning","file_path":"internal/sem/grammars/erlang/tree_sitter/array.h","effect_on_semantic_completeness":"file parsed with syntax errors; semantic facts may be incomplete","detail":"tree-sitter syntax error nodes present: error ERROR at line 162 column 21 near \"Array\""},{"code":"E_PARSE_ERROR","severity":"warning","file_path":"internal/sem/grammars/fsharp/tree_sitter/array.h","effect_on_semantic_completeness":"file parsed with syntax errors; semantic facts may be incomplete","detail":"tree-sitter syntax error nodes present: error ERROR at line 160 column 21 near \"Array\""},{"code":"E_PARSE_ERROR","severity":"warning","file_path":"internal/sem/grammars/haskell/tree_sitter/array.h","effect_on_semantic_completeness":"file parsed with syntax errors; semantic facts may be incomplete","detail":"tree-sitter syntax error nodes present: error ERROR at line 159 column 21 near \"Array\""},{"code":"E_PARSE_ERROR","severity":"warning","file_path":"internal/sem/grammars/perl/tree_sitter/array.h","effect_on_semantic_completeness":"file parsed with syntax errors; semantic facts may be incomplete","detail":"tree-sitter syntax error nodes present: error ERROR at line 160 column 21 near \"Array\""}],"stats":{"files":618,"parsed_files":618,"symbols":12511,"relations":58885,"partial_failures":5,"completeness_level":"degraded"},"completeness":{"languages":{"Bash":{"files":7,"symbols":36},"C":{"files":5,"symbols":55},"C#":{"files":4,"symbols":20},"C++":{"files":26,"symbols":1600},"CSS":{"files":1,"symbols":2},"CUE":{"files":1,"symbols":9},"Clojure":{"files":1,"symbols":3},"ClojureScript":{"files":1,"symbols":3},"Dart":{"files":1,"symbols":3},"Dockerfile":{"files":1,"symbols":2},"Elixir":{"files":1,"symbols":3},"Erlang":{"files":1,"symbols":4},"F#":{"files":1,"symbols":4},"Git Ignore":{"files":3,"symbols":3},"Go":{"files":404,"symbols":9145},"Groovy":{"files":2,"symbols":8},"HCL":{"files":2,"symbols":7},"HTML":{"files":1,"symbols":3},"Haskell":{"files":1,"symbols":3},"JSON":{"files":17,"symbols":279},"Java":{"files":4,"symbols":20},"JavaScript":{"files":1,"symbols":4},"Julia":{"files":2,"symbols":6},"Kotlin":{"files":2,"symbols":8},"Kustomize":{"files":1,"symbols":4},"Lua":{"files":1,"symbols":3},"Make":{"files":1,"symbols":2},"Markdown":{"files":46,"symbols":767},"OCaml":{"files":1,"symbols":5},"Objective-C":{"files":2,"symbols":5},"PHP":{"files":3,"symbols":13},"Patch":{"files":6,"symbols":6},"Perl":{"files":1,"symbols":5},"Protocol Buffers":{"files":2,"symbols":8},"Python":{"files":26,"symbols":300},"R":{"files":2,"symbols":5},"Ruby":{"files":2,"symbols":8},"Rust":{"files":3,"symbols":17},"SQL":{"files":1,"symbols":4},"Scala":{"files":2,"symbols":8},"Svelte":{"files":1,"symbols":1},"Swift":{"files":2,"symbols":8},"TOML":{"files":4,"symbols":23},"TypeScript":{"files":9,"symbols":36},"Vue":{"files":1,"symbols":3},"XML":{"files":1,"symbols":2},"YAML":{"files":7,"symbols":39},"Zig":{"files":2,"symbols":7},"Zsh":{"files":1,"symbols":2}},"relations":{"ACCESSES":55,"ASYNC_CALLS":1,"CALLS":22642,"CONFIGURES":356,"CONSTRUCTS":63,"CONTAINS":3887,"DATA_FLOWS":5882,"DEFINES":12511,"EMITS":3,"EXTENDS":18,"FILE_CHANGES_WITH":55,"HANDLES_GRAPHQL":2,"HANDLES_GRPC":2,"HANDLES_ROUTE":49,"HANDLES_TOOL":17,"HANDLES_TRPC":1,"HTTP_CALLS":70,"IMPLEMENTS":7,"IMPORTS":2258,"INHERITS":18,"LISTENS_ON":2,"OVERRIDES":10,"PARAM_TYPE":1530,"READS_FIELD":1592,"RESOURCE_DEPENDS_ON":8,"RETURNS_TYPE":988,"SIMILAR_TO":3595,"TESTS":9,"USES_TYPE":2873,"WRITES_FIELD":381}},"completeness_scope":{"language":"Go","language_files":404,"other_language_failures":5,"other_failure_languages":["C++ 5"],"in_scope_warnings":[{"code":"W_DATA_FLOW_EVIDENCE_UNMERGED","severity":"info","effect_on_semantic_completeness":"each DATA_FLOWS relation carries every flow found by the symbol that produced it; on these edges a second symbol justified the same edge and its flows were dropped, so the evidence array explains the edge from one side only. The affected edges are counted, not identified: each record had already been written when its second producer appeared, so none of them can be marked individually and a consumer cannot tell from a relation alone whether it is one of them","detail":"5 DATA_FLOWS edge(s) were justified by more than one symbol, typically mutual recursion where one side forwards a parameter and the other returns a call; the relation, its confidence and its reason are unaffected. Independent of EVIDENCE_TRUNCATED: one edge can be both, neither supersedes the other, and this count includes edges that were also truncated"}],"worktree_snapshot":true,"level":"degraded"}}
+{
+  "format_version": 1,
+  "repo_root": "/src",
+  "commit": "e8c11a33245ff2744af5978b257140c4949f2443",
+  "tree": "2e06acdde283eb296dd4c873013b9894b6a4c89e",
+  "profile": "full",
+  "query": "parseCommonFlags",
+  "depth": 2,
+  "index_cache_hit": false,
+  "index_latency_ms": 140090,
+  "query_latency_ms": 69,
+  "total_latency_ms": 140160,
+  "focus_matches_total": 1,
+  "disambiguation_required": false,
+  "focus": {
+    "id": "gh/entireio/entire-graph:Go:internal/cli/root.go:function:parseCommonFlags",
+    "name": "parseCommonFlags",
+    "qualified_name": "parseCommonFlags",
+    "kind": "function",
+    "file_path": "internal/cli/root.go",
+    "start_line": 729,
+    "end_line": 763,
+    "language": "Go"
+  },
+  "callers": {
+    "total": 9,
+    "direct": 3,
+    "transitive": 6,
+    "in": 3,
+    "entries": [
+      {
+        "endpoint": {
+          "id": "gh/entireio/entire-graph:Go:internal/cli/root.go:function:runCommit",
+          "name": "runCommit",
+          "qualified_name": "runCommit",
+          "kind": "function",
+          "file_path": "internal/cli/root.go",
+          "start_line": 765,
+          "end_line": 792,
+          "language": "Go"
+        },
+        "relation": "CALLS",
+        "direction": "in",
+        "depth": 1,
+        "call_site": { "file_path": "internal/cli/root.go", "line": 766 }
+      },
+      {
+        "endpoint": {
+          "id": "gh/entireio/entire-graph:Go:internal/cli/root.go:function:runCheckpoint",
+          "name": "runCheckpoint",
+          "qualified_name": "runCheckpoint",
+          "kind": "function",
+          "file_path": "internal/cli/root.go",
+          "start_line": 794,
+          "end_line": 817,
+          "language": "Go"
+        },
+        "relation": "CALLS",
+        "direction": "in",
+        "depth": 1,
+        "call_site": { "file_path": "internal/cli/root.go", "line": 795 }
+      },
+      {
+        "endpoint": {
+          "id": "gh/entireio/entire-graph:Go:internal/cli/root.go:function:parseDiffFlags",
+          "name": "parseDiffFlags",
+          "qualified_name": "parseDiffFlags",
+          "kind": "function",
+          "file_path": "internal/cli/root.go",
+          "start_line": 874,
+          "end_line": 925,
+          "language": "Go"
+        },
+        "relation": "CALLS",
+        "direction": "in",
+        "depth": 1,
+        "call_site": { "file_path": "internal/cli/root.go", "line": 888 }
+      },
+      {
+        "endpoint": {
+          "id": "gh/entireio/entire-graph:Go:internal/cli/agentguide_test.go:function:parserAcceptsFlag",
+          "name": "parserAcceptsFlag",
+          "qualified_name": "parserAcceptsFlag",
+          "kind": "function",
+          "file_path": "internal/cli/agentguide_test.go",
+          "start_line": 296,
+          "end_line": 330,
+          "language": "Go"
+        },
+        "relation": "CALLS",
+        "direction": "in",
+        "depth": 2,
+        "via": "parseDiffFlags",
+        "call_site": { "file_path": "internal/cli/agentguide_test.go", "line": 320 }
+      },
+      {
+        "endpoint": {
+          "id": "gh/entireio/entire-graph:Go:internal/cli/root.go:function:Run",
+          "name": "Run",
+          "qualified_name": "Run",
+          "kind": "function",
+          "file_path": "internal/cli/root.go",
+          "start_line": 43,
+          "end_line": 127,
+          "language": "Go"
+        },
+        "relation": "CALLS",
+        "direction": "in",
+        "depth": 2,
+        "via": "runCheckpoint",
+        "call_site": { "file_path": "internal/cli/root.go", "line": 77 }
+      },
+      {
+        "endpoint": {
+          "id": "gh/entireio/entire-graph:Go:internal/cli/root.go:function:runDiff",
+          "name": "runDiff",
+          "qualified_name": "runDiff",
+          "kind": "function",
+          "file_path": "internal/cli/root.go",
+          "start_line": 927,
+          "end_line": 941,
+          "language": "Go"
+        },
+        "relation": "CALLS",
+        "direction": "in",
+        "depth": 2,
+        "via": "parseDiffFlags",
+        "call_site": { "file_path": "internal/cli/root.go", "line": 928 }
+      },
+      {
+        "endpoint": {
+          "id": "gh/entireio/entire-graph:Go:internal/cli/root_test.go:function:TestParseDiffFlagsSeparatesUnknownFlagsFromPaths",
+          "name": "TestParseDiffFlagsSeparatesUnknownFlagsFromPaths",
+          "qualified_name": "TestParseDiffFlagsSeparatesUnknownFlagsFromPaths",
+          "kind": "function",
+          "file_path": "internal/cli/root_test.go",
+          "start_line": 1348,
+          "end_line": 1424,
+          "language": "Go"
+        },
+        "relation": "CALLS",
+        "direction": "in",
+        "depth": 2,
+        "via": "parseDiffFlags",
+        "call_site": { "file_path": "internal/cli/root_test.go", "line": 1406 }
+      },
+      {
+        "endpoint": {
+          "id": "gh/entireio/entire-graph:Go:internal/cli/root_test.go:function:TestParseDiffFlagsRequiresRevisionValues",
+          "name": "TestParseDiffFlagsRequiresRevisionValues",
+          "qualified_name": "TestParseDiffFlagsRequiresRevisionValues",
+          "kind": "function",
+          "file_path": "internal/cli/root_test.go",
+          "start_line": 1426,
+          "end_line": 1432,
+          "language": "Go"
+        },
+        "relation": "CALLS",
+        "direction": "in",
+        "depth": 2,
+        "via": "parseDiffFlags",
+        "call_site": { "file_path": "internal/cli/root_test.go", "line": 1428 }
+      },
+      {
+        "endpoint": {
+          "id": "gh/entireio/entire-graph:Go:internal/cli/root_test.go:function:TestParseDiffFlagsRejectsOptionShapedRevision",
+          "name": "TestParseDiffFlagsRejectsOptionShapedRevision",
+          "qualified_name": "TestParseDiffFlagsRejectsOptionShapedRevision",
+          "kind": "function",
+          "file_path": "internal/cli/root_test.go",
+          "start_line": 1452,
+          "end_line": 1467,
+          "language": "Go"
+        },
+        "relation": "CALLS",
+        "direction": "in",
+        "depth": 2,
+        "via": "parseDiffFlags",
+        "call_site": {
+          "file_path": "internal/cli/root_test.go",
+          "line": 1459,
+          "additional_sites": 1
+        }
+      }
+    ]
+  },
+  "callees": {
+    "total": 3,
+    "out": 3,
+    "entries": [
+      {
+        "endpoint": {
+          "id": "external:symbol:errors.New",
+          "name": "New",
+          "qualified_name": "errors.New",
+          "kind": "symbol",
+          "external": true
+        },
+        "relation": "CALLS",
+        "direction": "out",
+        "depth": 1
+      },
+      {
+        "endpoint": {
+          "id": "external:symbol:fmt.Errorf",
+          "name": "Errorf",
+          "qualified_name": "fmt.Errorf",
+          "kind": "symbol",
+          "external": true
+        },
+        "relation": "CALLS",
+        "direction": "out",
+        "depth": 1
+      },
+      {
+        "endpoint": {
+          "id": "external:symbol:strconv.Atoi",
+          "name": "Atoi",
+          "qualified_name": "strconv.Atoi",
+          "kind": "symbol",
+          "external": true
+        },
+        "relation": "CALLS",
+        "direction": "out",
+        "depth": 1
+      }
+    ]
+  },
+  "type_consumers": {
+    "total": 2,
+    "out": 2,
+    "entries": [
+      {
+        "endpoint": {
+          "id": "gh/entireio/entire-graph:Go:internal/cli/root.go:type:commonFlags",
+          "name": "commonFlags",
+          "qualified_name": "commonFlags",
+          "kind": "type",
+          "file_path": "internal/cli/root.go",
+          "start_line": 572,
+          "end_line": 579,
+          "language": "Go"
+        },
+        "relation": "RETURNS_TYPE",
+        "direction": "out",
+        "depth": 1
+      },
+      {
+        "endpoint": {
+          "id": "gh/entireio/entire-graph:Go:internal/cli/root.go:type:commonFlags",
+          "name": "commonFlags",
+          "qualified_name": "commonFlags",
+          "kind": "type",
+          "file_path": "internal/cli/root.go",
+          "start_line": 572,
+          "end_line": 579,
+          "language": "Go"
+        },
+        "relation": "USES_TYPE",
+        "direction": "out",
+        "depth": 1
+      }
+    ]
+  },
+  "data_flows": {
+    "total": 2,
+    "direct": 2,
+    "in": 2,
+    "entries": [
+      {
+        "endpoint": {
+          "id": "gh/entireio/entire-graph:Go:internal/cli/root.go:function:runCommit",
+          "name": "runCommit",
+          "qualified_name": "runCommit",
+          "kind": "function",
+          "file_path": "internal/cli/root.go",
+          "start_line": 765,
+          "end_line": 792,
+          "language": "Go"
+        },
+        "relation": "DATA_FLOWS",
+        "direction": "in",
+        "depth": 1
+      },
+      {
+        "endpoint": {
+          "id": "gh/entireio/entire-graph:Go:internal/cli/root.go:function:runCheckpoint",
+          "name": "runCheckpoint",
+          "qualified_name": "runCheckpoint",
+          "kind": "function",
+          "file_path": "internal/cli/root.go",
+          "start_line": 794,
+          "end_line": 817,
+          "language": "Go"
+        },
+        "relation": "DATA_FLOWS",
+        "direction": "in",
+        "depth": 1
+      }
+    ]
+  },
+  "co_changes": { "total": 0, "entries": [] },
+  "siblings": { "total": 0, "entries": [] },
+  "warnings": [
+    {
+      "code": "W_WORKTREE_SNAPSHOT",
+      "severity": "warning",
+      "effect_on_semantic_completeness": "snapshot records are read from the working tree because --worktree was requested"
+    },
+    {
+      "code": "W_DATA_FLOW_EVIDENCE_UNMERGED",
+      "severity": "info",
+      "effect_on_semantic_completeness": "each DATA_FLOWS relation carries every flow found by the symbol that produced it; on these edges a second symbol justified the same edge and its flows were dropped, so the evidence array explains the edge from one side only. The affected edges are counted, not identified: each record had already been written when its second producer appeared, so none of them can be marked individually and a consumer cannot tell from a relation alone whether it is one of them",
+      "detail": "5 DATA_FLOWS edge(s) were justified by more than one symbol, typically mutual recursion where one side forwards a parameter and the other returns a call; the relation, its confidence and its reason are unaffected. Independent of EVIDENCE_TRUNCATED: one edge can be both, neither supersedes the other, and this count includes edges that were also truncated"
+    }
+  ],
+  "partial_failures": [
+    {
+      "code": "E_PARSE_ERROR",
+      "severity": "warning",
+      "file_path": "internal/sem/grammars/csharp/tree_sitter/array.h",
+      "effect_on_semantic_completeness": "file parsed with syntax errors; semantic facts may be incomplete",
+      "detail": "tree-sitter syntax error nodes present: error ERROR at line 160 column 21 near \"Array\""
+    },
+    {
+      "code": "E_PARSE_ERROR",
+      "severity": "warning",
+      "file_path": "internal/sem/grammars/erlang/tree_sitter/array.h",
+      "effect_on_semantic_completeness": "file parsed with syntax errors; semantic facts may be incomplete",
+      "detail": "tree-sitter syntax error nodes present: error ERROR at line 162 column 21 near \"Array\""
+    },
+    {
+      "code": "E_PARSE_ERROR",
+      "severity": "warning",
+      "file_path": "internal/sem/grammars/fsharp/tree_sitter/array.h",
+      "effect_on_semantic_completeness": "file parsed with syntax errors; semantic facts may be incomplete",
+      "detail": "tree-sitter syntax error nodes present: error ERROR at line 160 column 21 near \"Array\""
+    },
+    {
+      "code": "E_PARSE_ERROR",
+      "severity": "warning",
+      "file_path": "internal/sem/grammars/haskell/tree_sitter/array.h",
+      "effect_on_semantic_completeness": "file parsed with syntax errors; semantic facts may be incomplete",
+      "detail": "tree-sitter syntax error nodes present: error ERROR at line 159 column 21 near \"Array\""
+    },
+    {
+      "code": "E_PARSE_ERROR",
+      "severity": "warning",
+      "file_path": "internal/sem/grammars/perl/tree_sitter/array.h",
+      "effect_on_semantic_completeness": "file parsed with syntax errors; semantic facts may be incomplete",
+      "detail": "tree-sitter syntax error nodes present: error ERROR at line 160 column 21 near \"Array\""
+    }
+  ],
+  "stats": {
+    "files": 618,
+    "parsed_files": 618,
+    "symbols": 12511,
+    "relations": 58885,
+    "partial_failures": 5,
+    "completeness_level": "degraded"
+  },
+  "completeness": {
+    "languages": {
+      "Bash": { "files": 7, "symbols": 36 },
+      "C": { "files": 5, "symbols": 55 },
+      "C#": { "files": 4, "symbols": 20 },
+      "C++": { "files": 26, "symbols": 1600 },
+      "CSS": { "files": 1, "symbols": 2 },
+      "CUE": { "files": 1, "symbols": 9 },
+      "Clojure": { "files": 1, "symbols": 3 },
+      "ClojureScript": { "files": 1, "symbols": 3 },
+      "Dart": { "files": 1, "symbols": 3 },
+      "Dockerfile": { "files": 1, "symbols": 2 },
+      "Elixir": { "files": 1, "symbols": 3 },
+      "Erlang": { "files": 1, "symbols": 4 },
+      "F#": { "files": 1, "symbols": 4 },
+      "Git Ignore": { "files": 3, "symbols": 3 },
+      "Go": { "files": 404, "symbols": 9145 },
+      "Groovy": { "files": 2, "symbols": 8 },
+      "HCL": { "files": 2, "symbols": 7 },
+      "HTML": { "files": 1, "symbols": 3 },
+      "Haskell": { "files": 1, "symbols": 3 },
+      "JSON": { "files": 17, "symbols": 279 },
+      "Java": { "files": 4, "symbols": 20 },
+      "JavaScript": { "files": 1, "symbols": 4 },
+      "Julia": { "files": 2, "symbols": 6 },
+      "Kotlin": { "files": 2, "symbols": 8 },
+      "Kustomize": { "files": 1, "symbols": 4 },
+      "Lua": { "files": 1, "symbols": 3 },
+      "Make": { "files": 1, "symbols": 2 },
+      "Markdown": { "files": 46, "symbols": 767 },
+      "OCaml": { "files": 1, "symbols": 5 },
+      "Objective-C": { "files": 2, "symbols": 5 },
+      "PHP": { "files": 3, "symbols": 13 },
+      "Patch": { "files": 6, "symbols": 6 },
+      "Perl": { "files": 1, "symbols": 5 },
+      "Protocol Buffers": { "files": 2, "symbols": 8 },
+      "Python": { "files": 26, "symbols": 300 },
+      "R": { "files": 2, "symbols": 5 },
+      "Ruby": { "files": 2, "symbols": 8 },
+      "Rust": { "files": 3, "symbols": 17 },
+      "SQL": { "files": 1, "symbols": 4 },
+      "Scala": { "files": 2, "symbols": 8 },
+      "Svelte": { "files": 1, "symbols": 1 },
+      "Swift": { "files": 2, "symbols": 8 },
+      "TOML": { "files": 4, "symbols": 23 },
+      "TypeScript": { "files": 9, "symbols": 36 },
+      "Vue": { "files": 1, "symbols": 3 },
+      "XML": { "files": 1, "symbols": 2 },
+      "YAML": { "files": 7, "symbols": 39 },
+      "Zig": { "files": 2, "symbols": 7 },
+      "Zsh": { "files": 1, "symbols": 2 }
+    },
+    "relations": {
+      "ACCESSES": 55,
+      "ASYNC_CALLS": 1,
+      "CALLS": 22642,
+      "CONFIGURES": 356,
+      "CONSTRUCTS": 63,
+      "CONTAINS": 3887,
+      "DATA_FLOWS": 5882,
+      "DEFINES": 12511,
+      "EMITS": 3,
+      "EXTENDS": 18,
+      "FILE_CHANGES_WITH": 55,
+      "HANDLES_GRAPHQL": 2,
+      "HANDLES_GRPC": 2,
+      "HANDLES_ROUTE": 49,
+      "HANDLES_TOOL": 17,
+      "HANDLES_TRPC": 1,
+      "HTTP_CALLS": 70,
+      "IMPLEMENTS": 7,
+      "IMPORTS": 2258,
+      "INHERITS": 18,
+      "LISTENS_ON": 2,
+      "OVERRIDES": 10,
+      "PARAM_TYPE": 1530,
+      "READS_FIELD": 1592,
+      "RESOURCE_DEPENDS_ON": 8,
+      "RETURNS_TYPE": 988,
+      "SIMILAR_TO": 3595,
+      "TESTS": 9,
+      "USES_TYPE": 2873,
+      "WRITES_FIELD": 381
+    }
+  },
+  "completeness_scope": {
+    "language": "Go",
+    "language_files": 404,
+    "other_language_failures": 5,
+    "other_failure_languages": ["C++ 5"],
+    "in_scope_warnings": [
+      {
+        "code": "W_DATA_FLOW_EVIDENCE_UNMERGED",
+        "severity": "info",
+        "effect_on_semantic_completeness": "each DATA_FLOWS relation carries every flow found by the symbol that produced it; on these edges a second symbol justified the same edge and its flows were dropped, so the evidence array explains the edge from one side only. The affected edges are counted, not identified: each record had already been written when its second producer appeared, so none of them can be marked individually and a consumer cannot tell from a relation alone whether it is one of them",
+        "detail": "5 DATA_FLOWS edge(s) were justified by more than one symbol, typically mutual recursion where one side forwards a parameter and the other returns a call; the relation, its confidence and its reason are unaffected. Independent of EVIDENCE_TRUNCATED: one edge can be both, neither supersedes the other, and this count includes edges that were also truncated"
+      }
+    ],
+    "worktree_snapshot": true,
+    "level": "degraded"
+  }
+}

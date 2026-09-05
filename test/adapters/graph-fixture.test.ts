@@ -13,13 +13,21 @@ describe("FixtureGraphAdapter", () => {
     expect(res.ok).toBe(true);
     if (!res.ok) return;
     const names = res.value.symbols.map((s) => s.ref.qualifiedName);
-    expect(names).toEqual(["Database.query", "RedirectController.handle", "TokenBucketRateLimiter"]);
+    expect(names).toEqual([
+      "Database.query",
+      "RedirectController.handle",
+      "TokenBucketRateLimiter",
+    ]);
     expect(res.value.symbols[0]?.dependentsCount).toBe(12);
     expect(res.value.changedFiles).toHaveLength(3);
   });
 
   it("resolves an impact fixture via the manifest and tags the origin", async () => {
-    const res = await adapter.impact({ name: "Database.query", file: "src/db/database.ts", line: 41 });
+    const res = await adapter.impact({
+      name: "Database.query",
+      file: "src/db/database.ts",
+      line: 41,
+    });
     expect(res.ok).toBe(true);
     if (!res.ok) return;
     expect(res.value.nodes.length).toBeGreaterThan(0);
@@ -28,7 +36,11 @@ describe("FixtureGraphAdapter", () => {
   });
 
   it("returns an empty contribution for a symbol with no fixture", async () => {
-    const res = await adapter.impact({ name: "Nonexistent.symbol", file: undefined, line: undefined });
+    const res = await adapter.impact({
+      name: "Nonexistent.symbol",
+      file: undefined,
+      line: undefined,
+    });
     expect(res.ok).toBe(true);
     if (res.ok) expect(res.value.nodes).toEqual([]);
   });

@@ -1,1 +1,745 @@
-{"format_version":1,"repo_root":"/src","commit":"e8c11a33245ff2744af5978b257140c4949f2443","tree":"2e06acdde283eb296dd4c873013b9894b6a4c89e","profile":"full","query":"runDiff","depth":2,"index_cache_hit":false,"index_latency_ms":171645,"query_latency_ms":102,"total_latency_ms":171748,"focus_matches_total":1,"disambiguation_required":false,"focus":{"id":"gh/entireio/entire-graph:Go:internal/cli/root.go:function:runDiff","name":"runDiff","qualified_name":"runDiff","kind":"function","file_path":"internal/cli/root.go","start_line":927,"end_line":941,"language":"Go"},"callers":{"total":132,"direct":3,"transitive":129,"in":3,"entries":[{"endpoint":{"id":"gh/entireio/entire-graph:Go:internal/cli/root.go:function:Run","name":"Run","qualified_name":"Run","kind":"function","file_path":"internal/cli/root.go","start_line":43,"end_line":127,"language":"Go"},"relation":"CALLS","direction":"in","depth":1,"call_site":{"file_path":"internal/cli/root.go","line":73}},{"endpoint":{"id":"gh/entireio/entire-graph:Go:internal/cli/root.go:function:runAnalyze","name":"runAnalyze","qualified_name":"runAnalyze","kind":"function","file_path":"internal/cli/root.go","start_line":819,"end_line":821,"language":"Go"},"relation":"CALLS","direction":"in","depth":1,"call_site":{"file_path":"internal/cli/root.go","line":820}},{"endpoint":{"id":"gh/entireio/entire-graph:Go:internal/cli/root_test.go:function:TestDiffRejectsUnknownFlag","name":"TestDiffRejectsUnknownFlag","qualified_name":"TestDiffRejectsUnknownFlag","kind":"function","file_path":"internal/cli/root_test.go","start_line":1436,"end_line":1447,"language":"Go"},"relation":"CALLS","direction":"in","depth":1,"call_site":{"file_path":"internal/cli/root_test.go","line":1440}},{"endpoint":{"id":"gh/entireio/entire-graph:Go:internal/cli/agents_test.go:function:TestAgentGuidePrintsDoctrine","name":"TestAgentGuidePrintsDoctrine","qualified_name":"TestAgentGuidePrintsDoctrine","kind":"function","file_path":"internal/cli/agents_test.go","start_line":26,"end_line":47,"language":"Go"},"relation":"CALLS","direction":"in","depth":2,"via":"Run","call_site":{"file_path":"internal/cli/agents_test.go","line":28}},{"endpoint":{"id":"gh/entireio/entire-graph:Go:internal/cli/agents_test.go:function:TestInitAgentsInstallsAndIsIdempotent","name":"TestInitAgentsInstallsAndIsIdempotent","qualified_name":"TestInitAgentsInstallsAndIsIdempotent","kind":"function","file_path":"internal/cli/agents_test.go","start_line":49,"end_line":112,"language":"Go"},"relation":"CALLS","direction":"in","depth":2,"via":"Run","call_site":{"file_path":"internal/cli/agents_test.go","line":59}},{"endpoint":{"id":"gh/entireio/entire-graph:Go:internal/cli/agents_test.go:function:TestInitAgentsRejectsMalformedMarkersWithoutWrites","name":"TestInitAgentsRejectsMalformedMarkersWithoutWrites","qualified_name":"TestInitAgentsRejectsMalformedMarkersWithoutWrites","kind":"function","file_path":"internal/cli/agents_test.go","start_line":403,"end_line":450,"language":"Go"},"relation":"CALLS","direction":"in","depth":2,"via":"Run","call_site":{"file_path":"internal/cli/agents_test.go","line":412,"additional_sites":1}},{"endpoint":{"id":"gh/entireio/entire-graph:Go:internal/cli/agents_test.go:function:TestInitAgentsMalformedMarkersDoNotCreateMissingOutputs","name":"TestInitAgentsMalformedMarkersDoNotCreateMissingOutputs","qualified_name":"TestInitAgentsMalformedMarkersDoNotCreateMissingOutputs","kind":"function","file_path":"internal/cli/agents_test.go","start_line":452,"end_line":487,"language":"Go"},"relation":"CALLS","direction":"in","depth":2,"via":"Run","call_site":{"file_path":"internal/cli/agents_test.go","line":454,"additional_sites":1}},{"endpoint":{"id":"gh/entireio/entire-graph:Go:internal/cli/agents_test.go:function:TestInitAgentsRejectsNonRegularInstructionFileWithoutWrites","name":"TestInitAgentsRejectsNonRegularInstructionFileWithoutWrites","qualified_name":"TestInitAgentsRejectsNonRegularInstructionFileWithoutWrites","kind":"function","file_path":"internal/cli/agents_test.go","start_line":489,"end_line":533,"language":"Go"},"relation":"CALLS","direction":"in","depth":2,"via":"Run","call_site":{"file_path":"internal/cli/agents_test.go","line":491,"additional_sites":1}},{"endpoint":{"id":"gh/entireio/entire-graph:Go:internal/cli/agents_test.go:function:TestInitAgentsRefusesInstructionAliasEscapingRepository","name":"TestInitAgentsRefusesInstructionAliasEscapingRepository","qualified_name":"TestInitAgentsRefusesInstructionAliasEscapingRepository","kind":"function","file_path":"internal/cli/agents_test.go","start_line":582,"end_line":620,"language":"Go"},"relation":"CALLS","direction":"in","depth":2,"via":"Run","call_site":{"file_path":"internal/cli/agents_test.go","line":585,"additional_sites":1}},{"endpoint":{"id":"gh/entireio/entire-graph:Go:internal/cli/agents_test.go:function:TestInitAgentsRefusesGuideAliasEscapingRepository","name":"TestInitAgentsRefusesGuideAliasEscapingRepository","qualified_name":"TestInitAgentsRefusesGuideAliasEscapingRepository","kind":"function","file_path":"internal/cli/agents_test.go","start_line":655,"end_line":727,"language":"Go"},"relation":"CALLS","direction":"in","depth":2,"via":"Run","call_site":{"file_path":"internal/cli/agents_test.go","line":697,"additional_sites":1}},{"endpoint":{"id":"gh/entireio/entire-graph:Go:internal/cli/agents_test.go:function:TestInitAgentsReportsUnreadableTargetAsOperationalFailure","name":"TestInitAgentsReportsUnreadableTargetAsOperationalFailure","qualified_name":"TestInitAgentsReportsUnreadableTargetAsOperationalFailure","kind":"function","file_path":"internal/cli/agents_test.go","start_line":750,"end_line":780,"language":"Go"},"relation":"CALLS","direction":"in","depth":2,"via":"Run","call_site":{"file_path":"internal/cli/agents_test.go","line":764}},{"endpoint":{"id":"gh/entireio/entire-graph:Go:internal/cli/agents_test.go:function:runInitAgentsForTest","name":"runInitAgentsForTest","qualified_name":"runInitAgentsForTest","kind":"function","file_path":"internal/cli/agents_test.go","start_line":822,"end_line":828,"language":"Go"},"relation":"CALLS","direction":"in","depth":2,"via":"Run","call_site":{"file_path":"internal/cli/agents_test.go","line":825}},{"endpoint":{"id":"gh/entireio/entire-graph:Go:internal/cli/agents_test.go:function:TestInitAgentsRefusesUntraversableSuffixAfterDirectoryAlias","name":"TestInitAgentsRefusesUntraversableSuffixAfterDirectoryAlias","qualified_name":"TestInitAgentsRefusesUntraversableSuffixAfterDirectoryAlias","kind":"function","file_path":"internal/cli/agents_test.go","start_line":1131,"end_line":1164,"language":"Go"},"relation":"CALLS","direction":"in","depth":2,"via":"Run","call_site":{"file_path":"internal/cli/agents_test.go","line":1151}},{"endpoint":{"id":"gh/entireio/entire-graph:Go:internal/cli/agents_test.go:function:TestInitAgentsPreservesTerminalSeparatorAfterAbsoluteAliasMapping","name":"TestInitAgentsPreservesTerminalSeparatorAfterAbsoluteAliasMapping","qualified_name":"TestInitAgentsPreservesTerminalSeparatorAfterAbsoluteAliasMapping","kind":"function","file_path":"internal/cli/agents_test.go","start_line":1170,"end_line":1200,"language":"Go"},"relation":"CALLS","direction":"in","depth":2,"via":"Run","call_site":{"file_path":"internal/cli/agents_test.go","line":1187}},{"endpoint":{"id":"gh/entireio/entire-graph:Go:internal/cli/agents_test.go:function:TestInitAgentsRefusesAbsoluteAliasLeavingRepository","name":"TestInitAgentsRefusesAbsoluteAliasLeavingRepository","qualified_name":"TestInitAgentsRefusesAbsoluteAliasLeavingRepository","kind":"function","file_path":"internal/cli/agents_test.go","start_line":1206,"end_line":1310,"language":"Go"},"relation":"CALLS","direction":"in","depth":2,"via":"Run","call_site":{"file_path":"internal/cli/agents_test.go","line":1284,"additional_sites":1}}]},"callees":{"total":4,"out":4,"entries":[{"endpoint":{"id":"gh/entireio/entire-graph:Go:internal/cli/help.go:function:unexpectedArgumentsError","name":"unexpectedArgumentsError","qualified_name":"unexpectedArgumentsError","kind":"function","file_path":"internal/cli/help.go","start_line":483,"end_line":496,"language":"Go"},"relation":"CALLS","direction":"out","depth":1},{"endpoint":{"id":"gh/entireio/entire-graph:Go:internal/cli/root.go:function:parseDiffFlags","name":"parseDiffFlags","qualified_name":"parseDiffFlags","kind":"function","file_path":"internal/cli/root.go","start_line":874,"end_line":925,"language":"Go"},"relation":"CALLS","direction":"out","depth":1},{"endpoint":{"id":"gh/entireio/entire-graph:Go:internal/cli/root.go:function:resolveRepo","name":"resolveRepo","qualified_name":"resolveRepo","kind":"function","file_path":"internal/cli/root.go","start_line":943,"end_line":970,"language":"Go"},"relation":"CALLS","direction":"out","depth":1},{"endpoint":{"id":"gh/entireio/entire-graph:Go:internal/cli/root.go:function:analyzeAndPrint","name":"analyzeAndPrint","qualified_name":"analyzeAndPrint","kind":"function","file_path":"internal/cli/root.go","start_line":1123,"end_line":1141,"language":"Go"},"relation":"CALLS","direction":"out","depth":1}]},"type_consumers":{"total":2,"out":2,"entries":[{"endpoint":{"id":"gh/entireio/entire-graph:Go:internal/cli/root.go:type:Options","name":"Options","qualified_name":"Options","kind":"type","file_path":"internal/cli/root.go","start_line":22,"end_line":31,"language":"Go"},"relation":"PARAM_TYPE","direction":"out","depth":1},{"endpoint":{"id":"gh/entireio/entire-graph:Go:internal/cli/root.go:type:Options","name":"Options","qualified_name":"Options","kind":"type","file_path":"internal/cli/root.go","start_line":22,"end_line":31,"language":"Go"},"relation":"USES_TYPE","direction":"out","depth":1}]},"data_flows":{"total":11,"direct":5,"in":5,"out":6,"entries":[{"endpoint":{"id":"gh/entireio/entire-graph:Go:internal/cli/help.go:function:unexpectedArgumentsError","name":"unexpectedArgumentsError","qualified_name":"unexpectedArgumentsError","kind":"function","file_path":"internal/cli/help.go","start_line":483,"end_line":496,"language":"Go"},"relation":"DATA_FLOWS","direction":"in","depth":1},{"endpoint":{"id":"gh/entireio/entire-graph:Go:internal/cli/help.go:function:unexpectedArgumentsError","name":"unexpectedArgumentsError","qualified_name":"unexpectedArgumentsError","kind":"function","file_path":"internal/cli/help.go","start_line":483,"end_line":496,"language":"Go"},"relation":"DATA_FLOWS","direction":"out","depth":1},{"endpoint":{"id":"gh/entireio/entire-graph:Go:internal/cli/root.go:function:Run","name":"Run","qualified_name":"Run","kind":"function","file_path":"internal/cli/root.go","start_line":43,"end_line":127,"language":"Go"},"relation":"DATA_FLOWS","direction":"in","depth":1},{"endpoint":{"id":"gh/entireio/entire-graph:Go:internal/cli/root.go:function:Run","name":"Run","qualified_name":"Run","kind":"function","file_path":"internal/cli/root.go","start_line":43,"end_line":127,"language":"Go"},"relation":"DATA_FLOWS","direction":"out","depth":1},{"endpoint":{"id":"gh/entireio/entire-graph:Go:internal/cli/root.go:function:runAnalyze","name":"runAnalyze","qualified_name":"runAnalyze","kind":"function","file_path":"internal/cli/root.go","start_line":819,"end_line":821,"language":"Go"},"relation":"DATA_FLOWS","direction":"in","depth":1},{"endpoint":{"id":"gh/entireio/entire-graph:Go:internal/cli/root.go:function:runAnalyze","name":"runAnalyze","qualified_name":"runAnalyze","kind":"function","file_path":"internal/cli/root.go","start_line":819,"end_line":821,"language":"Go"},"relation":"DATA_FLOWS","direction":"out","depth":1},{"endpoint":{"id":"gh/entireio/entire-graph:Go:internal/cli/root.go:function:parseDiffFlags","name":"parseDiffFlags","qualified_name":"parseDiffFlags","kind":"function","file_path":"internal/cli/root.go","start_line":874,"end_line":925,"language":"Go"},"relation":"DATA_FLOWS","direction":"out","depth":1},{"endpoint":{"id":"gh/entireio/entire-graph:Go:internal/cli/root.go:function:resolveRepo","name":"resolveRepo","qualified_name":"resolveRepo","kind":"function","file_path":"internal/cli/root.go","start_line":943,"end_line":970,"language":"Go"},"relation":"DATA_FLOWS","direction":"in","depth":1},{"endpoint":{"id":"gh/entireio/entire-graph:Go:internal/cli/root.go:function:resolveRepo","name":"resolveRepo","qualified_name":"resolveRepo","kind":"function","file_path":"internal/cli/root.go","start_line":943,"end_line":970,"language":"Go"},"relation":"DATA_FLOWS","direction":"out","depth":1},{"endpoint":{"id":"gh/entireio/entire-graph:Go:internal/cli/root.go:function:analyzeAndPrint","name":"analyzeAndPrint","qualified_name":"analyzeAndPrint","kind":"function","file_path":"internal/cli/root.go","start_line":1123,"end_line":1141,"language":"Go"},"relation":"DATA_FLOWS","direction":"in","depth":1},{"endpoint":{"id":"gh/entireio/entire-graph:Go:internal/cli/root.go:function:analyzeAndPrint","name":"analyzeAndPrint","qualified_name":"analyzeAndPrint","kind":"function","file_path":"internal/cli/root.go","start_line":1123,"end_line":1141,"language":"Go"},"relation":"DATA_FLOWS","direction":"out","depth":1}]},"co_changes":{"total":0,"entries":[]},"siblings":{"total":0,"entries":[]},"warnings":[{"code":"W_WORKTREE_SNAPSHOT","severity":"warning","effect_on_semantic_completeness":"snapshot records are read from the working tree because --worktree was requested"},{"code":"W_DATA_FLOW_EVIDENCE_UNMERGED","severity":"info","effect_on_semantic_completeness":"each DATA_FLOWS relation carries every flow found by the symbol that produced it; on these edges a second symbol justified the same edge and its flows were dropped, so the evidence array explains the edge from one side only. The affected edges are counted, not identified: each record had already been written when its second producer appeared, so none of them can be marked individually and a consumer cannot tell from a relation alone whether it is one of them","detail":"5 DATA_FLOWS edge(s) were justified by more than one symbol, typically mutual recursion where one side forwards a parameter and the other returns a call; the relation, its confidence and its reason are unaffected. Independent of EVIDENCE_TRUNCATED: one edge can be both, neither supersedes the other, and this count includes edges that were also truncated"}],"partial_failures":[{"code":"E_PARSE_ERROR","severity":"warning","file_path":"internal/sem/grammars/csharp/tree_sitter/array.h","effect_on_semantic_completeness":"file parsed with syntax errors; semantic facts may be incomplete","detail":"tree-sitter syntax error nodes present: error ERROR at line 160 column 21 near \"Array\""},{"code":"E_PARSE_ERROR","severity":"warning","file_path":"internal/sem/grammars/erlang/tree_sitter/array.h","effect_on_semantic_completeness":"file parsed with syntax errors; semantic facts may be incomplete","detail":"tree-sitter syntax error nodes present: error ERROR at line 162 column 21 near \"Array\""},{"code":"E_PARSE_ERROR","severity":"warning","file_path":"internal/sem/grammars/fsharp/tree_sitter/array.h","effect_on_semantic_completeness":"file parsed with syntax errors; semantic facts may be incomplete","detail":"tree-sitter syntax error nodes present: error ERROR at line 160 column 21 near \"Array\""},{"code":"E_PARSE_ERROR","severity":"warning","file_path":"internal/sem/grammars/haskell/tree_sitter/array.h","effect_on_semantic_completeness":"file parsed with syntax errors; semantic facts may be incomplete","detail":"tree-sitter syntax error nodes present: error ERROR at line 159 column 21 near \"Array\""},{"code":"E_PARSE_ERROR","severity":"warning","file_path":"internal/sem/grammars/perl/tree_sitter/array.h","effect_on_semantic_completeness":"file parsed with syntax errors; semantic facts may be incomplete","detail":"tree-sitter syntax error nodes present: error ERROR at line 160 column 21 near \"Array\""}],"stats":{"files":618,"parsed_files":618,"symbols":12511,"relations":58885,"partial_failures":5,"completeness_level":"degraded"},"completeness":{"languages":{"Bash":{"files":7,"symbols":36},"C":{"files":5,"symbols":55},"C#":{"files":4,"symbols":20},"C++":{"files":26,"symbols":1600},"CSS":{"files":1,"symbols":2},"CUE":{"files":1,"symbols":9},"Clojure":{"files":1,"symbols":3},"ClojureScript":{"files":1,"symbols":3},"Dart":{"files":1,"symbols":3},"Dockerfile":{"files":1,"symbols":2},"Elixir":{"files":1,"symbols":3},"Erlang":{"files":1,"symbols":4},"F#":{"files":1,"symbols":4},"Git Ignore":{"files":3,"symbols":3},"Go":{"files":404,"symbols":9145},"Groovy":{"files":2,"symbols":8},"HCL":{"files":2,"symbols":7},"HTML":{"files":1,"symbols":3},"Haskell":{"files":1,"symbols":3},"JSON":{"files":17,"symbols":279},"Java":{"files":4,"symbols":20},"JavaScript":{"files":1,"symbols":4},"Julia":{"files":2,"symbols":6},"Kotlin":{"files":2,"symbols":8},"Kustomize":{"files":1,"symbols":4},"Lua":{"files":1,"symbols":3},"Make":{"files":1,"symbols":2},"Markdown":{"files":46,"symbols":767},"OCaml":{"files":1,"symbols":5},"Objective-C":{"files":2,"symbols":5},"PHP":{"files":3,"symbols":13},"Patch":{"files":6,"symbols":6},"Perl":{"files":1,"symbols":5},"Protocol Buffers":{"files":2,"symbols":8},"Python":{"files":26,"symbols":300},"R":{"files":2,"symbols":5},"Ruby":{"files":2,"symbols":8},"Rust":{"files":3,"symbols":17},"SQL":{"files":1,"symbols":4},"Scala":{"files":2,"symbols":8},"Svelte":{"files":1,"symbols":1},"Swift":{"files":2,"symbols":8},"TOML":{"files":4,"symbols":23},"TypeScript":{"files":9,"symbols":36},"Vue":{"files":1,"symbols":3},"XML":{"files":1,"symbols":2},"YAML":{"files":7,"symbols":39},"Zig":{"files":2,"symbols":7},"Zsh":{"files":1,"symbols":2}},"relations":{"ACCESSES":55,"ASYNC_CALLS":1,"CALLS":22642,"CONFIGURES":356,"CONSTRUCTS":63,"CONTAINS":3887,"DATA_FLOWS":5882,"DEFINES":12511,"EMITS":3,"EXTENDS":18,"FILE_CHANGES_WITH":55,"HANDLES_GRAPHQL":2,"HANDLES_GRPC":2,"HANDLES_ROUTE":49,"HANDLES_TOOL":17,"HANDLES_TRPC":1,"HTTP_CALLS":70,"IMPLEMENTS":7,"IMPORTS":2258,"INHERITS":18,"LISTENS_ON":2,"OVERRIDES":10,"PARAM_TYPE":1530,"READS_FIELD":1592,"RESOURCE_DEPENDS_ON":8,"RETURNS_TYPE":988,"SIMILAR_TO":3595,"TESTS":9,"USES_TYPE":2873,"WRITES_FIELD":381}},"completeness_scope":{"language":"Go","language_files":404,"other_language_failures":5,"other_failure_languages":["C++ 5"],"in_scope_warnings":[{"code":"W_DATA_FLOW_EVIDENCE_UNMERGED","severity":"info","effect_on_semantic_completeness":"each DATA_FLOWS relation carries every flow found by the symbol that produced it; on these edges a second symbol justified the same edge and its flows were dropped, so the evidence array explains the edge from one side only. The affected edges are counted, not identified: each record had already been written when its second producer appeared, so none of them can be marked individually and a consumer cannot tell from a relation alone whether it is one of them","detail":"5 DATA_FLOWS edge(s) were justified by more than one symbol, typically mutual recursion where one side forwards a parameter and the other returns a call; the relation, its confidence and its reason are unaffected. Independent of EVIDENCE_TRUNCATED: one edge can be both, neither supersedes the other, and this count includes edges that were also truncated"}],"worktree_snapshot":true,"level":"degraded"}}
+{
+  "format_version": 1,
+  "repo_root": "/src",
+  "commit": "e8c11a33245ff2744af5978b257140c4949f2443",
+  "tree": "2e06acdde283eb296dd4c873013b9894b6a4c89e",
+  "profile": "full",
+  "query": "runDiff",
+  "depth": 2,
+  "index_cache_hit": false,
+  "index_latency_ms": 171645,
+  "query_latency_ms": 102,
+  "total_latency_ms": 171748,
+  "focus_matches_total": 1,
+  "disambiguation_required": false,
+  "focus": {
+    "id": "gh/entireio/entire-graph:Go:internal/cli/root.go:function:runDiff",
+    "name": "runDiff",
+    "qualified_name": "runDiff",
+    "kind": "function",
+    "file_path": "internal/cli/root.go",
+    "start_line": 927,
+    "end_line": 941,
+    "language": "Go"
+  },
+  "callers": {
+    "total": 132,
+    "direct": 3,
+    "transitive": 129,
+    "in": 3,
+    "entries": [
+      {
+        "endpoint": {
+          "id": "gh/entireio/entire-graph:Go:internal/cli/root.go:function:Run",
+          "name": "Run",
+          "qualified_name": "Run",
+          "kind": "function",
+          "file_path": "internal/cli/root.go",
+          "start_line": 43,
+          "end_line": 127,
+          "language": "Go"
+        },
+        "relation": "CALLS",
+        "direction": "in",
+        "depth": 1,
+        "call_site": { "file_path": "internal/cli/root.go", "line": 73 }
+      },
+      {
+        "endpoint": {
+          "id": "gh/entireio/entire-graph:Go:internal/cli/root.go:function:runAnalyze",
+          "name": "runAnalyze",
+          "qualified_name": "runAnalyze",
+          "kind": "function",
+          "file_path": "internal/cli/root.go",
+          "start_line": 819,
+          "end_line": 821,
+          "language": "Go"
+        },
+        "relation": "CALLS",
+        "direction": "in",
+        "depth": 1,
+        "call_site": { "file_path": "internal/cli/root.go", "line": 820 }
+      },
+      {
+        "endpoint": {
+          "id": "gh/entireio/entire-graph:Go:internal/cli/root_test.go:function:TestDiffRejectsUnknownFlag",
+          "name": "TestDiffRejectsUnknownFlag",
+          "qualified_name": "TestDiffRejectsUnknownFlag",
+          "kind": "function",
+          "file_path": "internal/cli/root_test.go",
+          "start_line": 1436,
+          "end_line": 1447,
+          "language": "Go"
+        },
+        "relation": "CALLS",
+        "direction": "in",
+        "depth": 1,
+        "call_site": { "file_path": "internal/cli/root_test.go", "line": 1440 }
+      },
+      {
+        "endpoint": {
+          "id": "gh/entireio/entire-graph:Go:internal/cli/agents_test.go:function:TestAgentGuidePrintsDoctrine",
+          "name": "TestAgentGuidePrintsDoctrine",
+          "qualified_name": "TestAgentGuidePrintsDoctrine",
+          "kind": "function",
+          "file_path": "internal/cli/agents_test.go",
+          "start_line": 26,
+          "end_line": 47,
+          "language": "Go"
+        },
+        "relation": "CALLS",
+        "direction": "in",
+        "depth": 2,
+        "via": "Run",
+        "call_site": { "file_path": "internal/cli/agents_test.go", "line": 28 }
+      },
+      {
+        "endpoint": {
+          "id": "gh/entireio/entire-graph:Go:internal/cli/agents_test.go:function:TestInitAgentsInstallsAndIsIdempotent",
+          "name": "TestInitAgentsInstallsAndIsIdempotent",
+          "qualified_name": "TestInitAgentsInstallsAndIsIdempotent",
+          "kind": "function",
+          "file_path": "internal/cli/agents_test.go",
+          "start_line": 49,
+          "end_line": 112,
+          "language": "Go"
+        },
+        "relation": "CALLS",
+        "direction": "in",
+        "depth": 2,
+        "via": "Run",
+        "call_site": { "file_path": "internal/cli/agents_test.go", "line": 59 }
+      },
+      {
+        "endpoint": {
+          "id": "gh/entireio/entire-graph:Go:internal/cli/agents_test.go:function:TestInitAgentsRejectsMalformedMarkersWithoutWrites",
+          "name": "TestInitAgentsRejectsMalformedMarkersWithoutWrites",
+          "qualified_name": "TestInitAgentsRejectsMalformedMarkersWithoutWrites",
+          "kind": "function",
+          "file_path": "internal/cli/agents_test.go",
+          "start_line": 403,
+          "end_line": 450,
+          "language": "Go"
+        },
+        "relation": "CALLS",
+        "direction": "in",
+        "depth": 2,
+        "via": "Run",
+        "call_site": {
+          "file_path": "internal/cli/agents_test.go",
+          "line": 412,
+          "additional_sites": 1
+        }
+      },
+      {
+        "endpoint": {
+          "id": "gh/entireio/entire-graph:Go:internal/cli/agents_test.go:function:TestInitAgentsMalformedMarkersDoNotCreateMissingOutputs",
+          "name": "TestInitAgentsMalformedMarkersDoNotCreateMissingOutputs",
+          "qualified_name": "TestInitAgentsMalformedMarkersDoNotCreateMissingOutputs",
+          "kind": "function",
+          "file_path": "internal/cli/agents_test.go",
+          "start_line": 452,
+          "end_line": 487,
+          "language": "Go"
+        },
+        "relation": "CALLS",
+        "direction": "in",
+        "depth": 2,
+        "via": "Run",
+        "call_site": {
+          "file_path": "internal/cli/agents_test.go",
+          "line": 454,
+          "additional_sites": 1
+        }
+      },
+      {
+        "endpoint": {
+          "id": "gh/entireio/entire-graph:Go:internal/cli/agents_test.go:function:TestInitAgentsRejectsNonRegularInstructionFileWithoutWrites",
+          "name": "TestInitAgentsRejectsNonRegularInstructionFileWithoutWrites",
+          "qualified_name": "TestInitAgentsRejectsNonRegularInstructionFileWithoutWrites",
+          "kind": "function",
+          "file_path": "internal/cli/agents_test.go",
+          "start_line": 489,
+          "end_line": 533,
+          "language": "Go"
+        },
+        "relation": "CALLS",
+        "direction": "in",
+        "depth": 2,
+        "via": "Run",
+        "call_site": {
+          "file_path": "internal/cli/agents_test.go",
+          "line": 491,
+          "additional_sites": 1
+        }
+      },
+      {
+        "endpoint": {
+          "id": "gh/entireio/entire-graph:Go:internal/cli/agents_test.go:function:TestInitAgentsRefusesInstructionAliasEscapingRepository",
+          "name": "TestInitAgentsRefusesInstructionAliasEscapingRepository",
+          "qualified_name": "TestInitAgentsRefusesInstructionAliasEscapingRepository",
+          "kind": "function",
+          "file_path": "internal/cli/agents_test.go",
+          "start_line": 582,
+          "end_line": 620,
+          "language": "Go"
+        },
+        "relation": "CALLS",
+        "direction": "in",
+        "depth": 2,
+        "via": "Run",
+        "call_site": {
+          "file_path": "internal/cli/agents_test.go",
+          "line": 585,
+          "additional_sites": 1
+        }
+      },
+      {
+        "endpoint": {
+          "id": "gh/entireio/entire-graph:Go:internal/cli/agents_test.go:function:TestInitAgentsRefusesGuideAliasEscapingRepository",
+          "name": "TestInitAgentsRefusesGuideAliasEscapingRepository",
+          "qualified_name": "TestInitAgentsRefusesGuideAliasEscapingRepository",
+          "kind": "function",
+          "file_path": "internal/cli/agents_test.go",
+          "start_line": 655,
+          "end_line": 727,
+          "language": "Go"
+        },
+        "relation": "CALLS",
+        "direction": "in",
+        "depth": 2,
+        "via": "Run",
+        "call_site": {
+          "file_path": "internal/cli/agents_test.go",
+          "line": 697,
+          "additional_sites": 1
+        }
+      },
+      {
+        "endpoint": {
+          "id": "gh/entireio/entire-graph:Go:internal/cli/agents_test.go:function:TestInitAgentsReportsUnreadableTargetAsOperationalFailure",
+          "name": "TestInitAgentsReportsUnreadableTargetAsOperationalFailure",
+          "qualified_name": "TestInitAgentsReportsUnreadableTargetAsOperationalFailure",
+          "kind": "function",
+          "file_path": "internal/cli/agents_test.go",
+          "start_line": 750,
+          "end_line": 780,
+          "language": "Go"
+        },
+        "relation": "CALLS",
+        "direction": "in",
+        "depth": 2,
+        "via": "Run",
+        "call_site": { "file_path": "internal/cli/agents_test.go", "line": 764 }
+      },
+      {
+        "endpoint": {
+          "id": "gh/entireio/entire-graph:Go:internal/cli/agents_test.go:function:runInitAgentsForTest",
+          "name": "runInitAgentsForTest",
+          "qualified_name": "runInitAgentsForTest",
+          "kind": "function",
+          "file_path": "internal/cli/agents_test.go",
+          "start_line": 822,
+          "end_line": 828,
+          "language": "Go"
+        },
+        "relation": "CALLS",
+        "direction": "in",
+        "depth": 2,
+        "via": "Run",
+        "call_site": { "file_path": "internal/cli/agents_test.go", "line": 825 }
+      },
+      {
+        "endpoint": {
+          "id": "gh/entireio/entire-graph:Go:internal/cli/agents_test.go:function:TestInitAgentsRefusesUntraversableSuffixAfterDirectoryAlias",
+          "name": "TestInitAgentsRefusesUntraversableSuffixAfterDirectoryAlias",
+          "qualified_name": "TestInitAgentsRefusesUntraversableSuffixAfterDirectoryAlias",
+          "kind": "function",
+          "file_path": "internal/cli/agents_test.go",
+          "start_line": 1131,
+          "end_line": 1164,
+          "language": "Go"
+        },
+        "relation": "CALLS",
+        "direction": "in",
+        "depth": 2,
+        "via": "Run",
+        "call_site": { "file_path": "internal/cli/agents_test.go", "line": 1151 }
+      },
+      {
+        "endpoint": {
+          "id": "gh/entireio/entire-graph:Go:internal/cli/agents_test.go:function:TestInitAgentsPreservesTerminalSeparatorAfterAbsoluteAliasMapping",
+          "name": "TestInitAgentsPreservesTerminalSeparatorAfterAbsoluteAliasMapping",
+          "qualified_name": "TestInitAgentsPreservesTerminalSeparatorAfterAbsoluteAliasMapping",
+          "kind": "function",
+          "file_path": "internal/cli/agents_test.go",
+          "start_line": 1170,
+          "end_line": 1200,
+          "language": "Go"
+        },
+        "relation": "CALLS",
+        "direction": "in",
+        "depth": 2,
+        "via": "Run",
+        "call_site": { "file_path": "internal/cli/agents_test.go", "line": 1187 }
+      },
+      {
+        "endpoint": {
+          "id": "gh/entireio/entire-graph:Go:internal/cli/agents_test.go:function:TestInitAgentsRefusesAbsoluteAliasLeavingRepository",
+          "name": "TestInitAgentsRefusesAbsoluteAliasLeavingRepository",
+          "qualified_name": "TestInitAgentsRefusesAbsoluteAliasLeavingRepository",
+          "kind": "function",
+          "file_path": "internal/cli/agents_test.go",
+          "start_line": 1206,
+          "end_line": 1310,
+          "language": "Go"
+        },
+        "relation": "CALLS",
+        "direction": "in",
+        "depth": 2,
+        "via": "Run",
+        "call_site": {
+          "file_path": "internal/cli/agents_test.go",
+          "line": 1284,
+          "additional_sites": 1
+        }
+      }
+    ]
+  },
+  "callees": {
+    "total": 4,
+    "out": 4,
+    "entries": [
+      {
+        "endpoint": {
+          "id": "gh/entireio/entire-graph:Go:internal/cli/help.go:function:unexpectedArgumentsError",
+          "name": "unexpectedArgumentsError",
+          "qualified_name": "unexpectedArgumentsError",
+          "kind": "function",
+          "file_path": "internal/cli/help.go",
+          "start_line": 483,
+          "end_line": 496,
+          "language": "Go"
+        },
+        "relation": "CALLS",
+        "direction": "out",
+        "depth": 1
+      },
+      {
+        "endpoint": {
+          "id": "gh/entireio/entire-graph:Go:internal/cli/root.go:function:parseDiffFlags",
+          "name": "parseDiffFlags",
+          "qualified_name": "parseDiffFlags",
+          "kind": "function",
+          "file_path": "internal/cli/root.go",
+          "start_line": 874,
+          "end_line": 925,
+          "language": "Go"
+        },
+        "relation": "CALLS",
+        "direction": "out",
+        "depth": 1
+      },
+      {
+        "endpoint": {
+          "id": "gh/entireio/entire-graph:Go:internal/cli/root.go:function:resolveRepo",
+          "name": "resolveRepo",
+          "qualified_name": "resolveRepo",
+          "kind": "function",
+          "file_path": "internal/cli/root.go",
+          "start_line": 943,
+          "end_line": 970,
+          "language": "Go"
+        },
+        "relation": "CALLS",
+        "direction": "out",
+        "depth": 1
+      },
+      {
+        "endpoint": {
+          "id": "gh/entireio/entire-graph:Go:internal/cli/root.go:function:analyzeAndPrint",
+          "name": "analyzeAndPrint",
+          "qualified_name": "analyzeAndPrint",
+          "kind": "function",
+          "file_path": "internal/cli/root.go",
+          "start_line": 1123,
+          "end_line": 1141,
+          "language": "Go"
+        },
+        "relation": "CALLS",
+        "direction": "out",
+        "depth": 1
+      }
+    ]
+  },
+  "type_consumers": {
+    "total": 2,
+    "out": 2,
+    "entries": [
+      {
+        "endpoint": {
+          "id": "gh/entireio/entire-graph:Go:internal/cli/root.go:type:Options",
+          "name": "Options",
+          "qualified_name": "Options",
+          "kind": "type",
+          "file_path": "internal/cli/root.go",
+          "start_line": 22,
+          "end_line": 31,
+          "language": "Go"
+        },
+        "relation": "PARAM_TYPE",
+        "direction": "out",
+        "depth": 1
+      },
+      {
+        "endpoint": {
+          "id": "gh/entireio/entire-graph:Go:internal/cli/root.go:type:Options",
+          "name": "Options",
+          "qualified_name": "Options",
+          "kind": "type",
+          "file_path": "internal/cli/root.go",
+          "start_line": 22,
+          "end_line": 31,
+          "language": "Go"
+        },
+        "relation": "USES_TYPE",
+        "direction": "out",
+        "depth": 1
+      }
+    ]
+  },
+  "data_flows": {
+    "total": 11,
+    "direct": 5,
+    "in": 5,
+    "out": 6,
+    "entries": [
+      {
+        "endpoint": {
+          "id": "gh/entireio/entire-graph:Go:internal/cli/help.go:function:unexpectedArgumentsError",
+          "name": "unexpectedArgumentsError",
+          "qualified_name": "unexpectedArgumentsError",
+          "kind": "function",
+          "file_path": "internal/cli/help.go",
+          "start_line": 483,
+          "end_line": 496,
+          "language": "Go"
+        },
+        "relation": "DATA_FLOWS",
+        "direction": "in",
+        "depth": 1
+      },
+      {
+        "endpoint": {
+          "id": "gh/entireio/entire-graph:Go:internal/cli/help.go:function:unexpectedArgumentsError",
+          "name": "unexpectedArgumentsError",
+          "qualified_name": "unexpectedArgumentsError",
+          "kind": "function",
+          "file_path": "internal/cli/help.go",
+          "start_line": 483,
+          "end_line": 496,
+          "language": "Go"
+        },
+        "relation": "DATA_FLOWS",
+        "direction": "out",
+        "depth": 1
+      },
+      {
+        "endpoint": {
+          "id": "gh/entireio/entire-graph:Go:internal/cli/root.go:function:Run",
+          "name": "Run",
+          "qualified_name": "Run",
+          "kind": "function",
+          "file_path": "internal/cli/root.go",
+          "start_line": 43,
+          "end_line": 127,
+          "language": "Go"
+        },
+        "relation": "DATA_FLOWS",
+        "direction": "in",
+        "depth": 1
+      },
+      {
+        "endpoint": {
+          "id": "gh/entireio/entire-graph:Go:internal/cli/root.go:function:Run",
+          "name": "Run",
+          "qualified_name": "Run",
+          "kind": "function",
+          "file_path": "internal/cli/root.go",
+          "start_line": 43,
+          "end_line": 127,
+          "language": "Go"
+        },
+        "relation": "DATA_FLOWS",
+        "direction": "out",
+        "depth": 1
+      },
+      {
+        "endpoint": {
+          "id": "gh/entireio/entire-graph:Go:internal/cli/root.go:function:runAnalyze",
+          "name": "runAnalyze",
+          "qualified_name": "runAnalyze",
+          "kind": "function",
+          "file_path": "internal/cli/root.go",
+          "start_line": 819,
+          "end_line": 821,
+          "language": "Go"
+        },
+        "relation": "DATA_FLOWS",
+        "direction": "in",
+        "depth": 1
+      },
+      {
+        "endpoint": {
+          "id": "gh/entireio/entire-graph:Go:internal/cli/root.go:function:runAnalyze",
+          "name": "runAnalyze",
+          "qualified_name": "runAnalyze",
+          "kind": "function",
+          "file_path": "internal/cli/root.go",
+          "start_line": 819,
+          "end_line": 821,
+          "language": "Go"
+        },
+        "relation": "DATA_FLOWS",
+        "direction": "out",
+        "depth": 1
+      },
+      {
+        "endpoint": {
+          "id": "gh/entireio/entire-graph:Go:internal/cli/root.go:function:parseDiffFlags",
+          "name": "parseDiffFlags",
+          "qualified_name": "parseDiffFlags",
+          "kind": "function",
+          "file_path": "internal/cli/root.go",
+          "start_line": 874,
+          "end_line": 925,
+          "language": "Go"
+        },
+        "relation": "DATA_FLOWS",
+        "direction": "out",
+        "depth": 1
+      },
+      {
+        "endpoint": {
+          "id": "gh/entireio/entire-graph:Go:internal/cli/root.go:function:resolveRepo",
+          "name": "resolveRepo",
+          "qualified_name": "resolveRepo",
+          "kind": "function",
+          "file_path": "internal/cli/root.go",
+          "start_line": 943,
+          "end_line": 970,
+          "language": "Go"
+        },
+        "relation": "DATA_FLOWS",
+        "direction": "in",
+        "depth": 1
+      },
+      {
+        "endpoint": {
+          "id": "gh/entireio/entire-graph:Go:internal/cli/root.go:function:resolveRepo",
+          "name": "resolveRepo",
+          "qualified_name": "resolveRepo",
+          "kind": "function",
+          "file_path": "internal/cli/root.go",
+          "start_line": 943,
+          "end_line": 970,
+          "language": "Go"
+        },
+        "relation": "DATA_FLOWS",
+        "direction": "out",
+        "depth": 1
+      },
+      {
+        "endpoint": {
+          "id": "gh/entireio/entire-graph:Go:internal/cli/root.go:function:analyzeAndPrint",
+          "name": "analyzeAndPrint",
+          "qualified_name": "analyzeAndPrint",
+          "kind": "function",
+          "file_path": "internal/cli/root.go",
+          "start_line": 1123,
+          "end_line": 1141,
+          "language": "Go"
+        },
+        "relation": "DATA_FLOWS",
+        "direction": "in",
+        "depth": 1
+      },
+      {
+        "endpoint": {
+          "id": "gh/entireio/entire-graph:Go:internal/cli/root.go:function:analyzeAndPrint",
+          "name": "analyzeAndPrint",
+          "qualified_name": "analyzeAndPrint",
+          "kind": "function",
+          "file_path": "internal/cli/root.go",
+          "start_line": 1123,
+          "end_line": 1141,
+          "language": "Go"
+        },
+        "relation": "DATA_FLOWS",
+        "direction": "out",
+        "depth": 1
+      }
+    ]
+  },
+  "co_changes": { "total": 0, "entries": [] },
+  "siblings": { "total": 0, "entries": [] },
+  "warnings": [
+    {
+      "code": "W_WORKTREE_SNAPSHOT",
+      "severity": "warning",
+      "effect_on_semantic_completeness": "snapshot records are read from the working tree because --worktree was requested"
+    },
+    {
+      "code": "W_DATA_FLOW_EVIDENCE_UNMERGED",
+      "severity": "info",
+      "effect_on_semantic_completeness": "each DATA_FLOWS relation carries every flow found by the symbol that produced it; on these edges a second symbol justified the same edge and its flows were dropped, so the evidence array explains the edge from one side only. The affected edges are counted, not identified: each record had already been written when its second producer appeared, so none of them can be marked individually and a consumer cannot tell from a relation alone whether it is one of them",
+      "detail": "5 DATA_FLOWS edge(s) were justified by more than one symbol, typically mutual recursion where one side forwards a parameter and the other returns a call; the relation, its confidence and its reason are unaffected. Independent of EVIDENCE_TRUNCATED: one edge can be both, neither supersedes the other, and this count includes edges that were also truncated"
+    }
+  ],
+  "partial_failures": [
+    {
+      "code": "E_PARSE_ERROR",
+      "severity": "warning",
+      "file_path": "internal/sem/grammars/csharp/tree_sitter/array.h",
+      "effect_on_semantic_completeness": "file parsed with syntax errors; semantic facts may be incomplete",
+      "detail": "tree-sitter syntax error nodes present: error ERROR at line 160 column 21 near \"Array\""
+    },
+    {
+      "code": "E_PARSE_ERROR",
+      "severity": "warning",
+      "file_path": "internal/sem/grammars/erlang/tree_sitter/array.h",
+      "effect_on_semantic_completeness": "file parsed with syntax errors; semantic facts may be incomplete",
+      "detail": "tree-sitter syntax error nodes present: error ERROR at line 162 column 21 near \"Array\""
+    },
+    {
+      "code": "E_PARSE_ERROR",
+      "severity": "warning",
+      "file_path": "internal/sem/grammars/fsharp/tree_sitter/array.h",
+      "effect_on_semantic_completeness": "file parsed with syntax errors; semantic facts may be incomplete",
+      "detail": "tree-sitter syntax error nodes present: error ERROR at line 160 column 21 near \"Array\""
+    },
+    {
+      "code": "E_PARSE_ERROR",
+      "severity": "warning",
+      "file_path": "internal/sem/grammars/haskell/tree_sitter/array.h",
+      "effect_on_semantic_completeness": "file parsed with syntax errors; semantic facts may be incomplete",
+      "detail": "tree-sitter syntax error nodes present: error ERROR at line 159 column 21 near \"Array\""
+    },
+    {
+      "code": "E_PARSE_ERROR",
+      "severity": "warning",
+      "file_path": "internal/sem/grammars/perl/tree_sitter/array.h",
+      "effect_on_semantic_completeness": "file parsed with syntax errors; semantic facts may be incomplete",
+      "detail": "tree-sitter syntax error nodes present: error ERROR at line 160 column 21 near \"Array\""
+    }
+  ],
+  "stats": {
+    "files": 618,
+    "parsed_files": 618,
+    "symbols": 12511,
+    "relations": 58885,
+    "partial_failures": 5,
+    "completeness_level": "degraded"
+  },
+  "completeness": {
+    "languages": {
+      "Bash": { "files": 7, "symbols": 36 },
+      "C": { "files": 5, "symbols": 55 },
+      "C#": { "files": 4, "symbols": 20 },
+      "C++": { "files": 26, "symbols": 1600 },
+      "CSS": { "files": 1, "symbols": 2 },
+      "CUE": { "files": 1, "symbols": 9 },
+      "Clojure": { "files": 1, "symbols": 3 },
+      "ClojureScript": { "files": 1, "symbols": 3 },
+      "Dart": { "files": 1, "symbols": 3 },
+      "Dockerfile": { "files": 1, "symbols": 2 },
+      "Elixir": { "files": 1, "symbols": 3 },
+      "Erlang": { "files": 1, "symbols": 4 },
+      "F#": { "files": 1, "symbols": 4 },
+      "Git Ignore": { "files": 3, "symbols": 3 },
+      "Go": { "files": 404, "symbols": 9145 },
+      "Groovy": { "files": 2, "symbols": 8 },
+      "HCL": { "files": 2, "symbols": 7 },
+      "HTML": { "files": 1, "symbols": 3 },
+      "Haskell": { "files": 1, "symbols": 3 },
+      "JSON": { "files": 17, "symbols": 279 },
+      "Java": { "files": 4, "symbols": 20 },
+      "JavaScript": { "files": 1, "symbols": 4 },
+      "Julia": { "files": 2, "symbols": 6 },
+      "Kotlin": { "files": 2, "symbols": 8 },
+      "Kustomize": { "files": 1, "symbols": 4 },
+      "Lua": { "files": 1, "symbols": 3 },
+      "Make": { "files": 1, "symbols": 2 },
+      "Markdown": { "files": 46, "symbols": 767 },
+      "OCaml": { "files": 1, "symbols": 5 },
+      "Objective-C": { "files": 2, "symbols": 5 },
+      "PHP": { "files": 3, "symbols": 13 },
+      "Patch": { "files": 6, "symbols": 6 },
+      "Perl": { "files": 1, "symbols": 5 },
+      "Protocol Buffers": { "files": 2, "symbols": 8 },
+      "Python": { "files": 26, "symbols": 300 },
+      "R": { "files": 2, "symbols": 5 },
+      "Ruby": { "files": 2, "symbols": 8 },
+      "Rust": { "files": 3, "symbols": 17 },
+      "SQL": { "files": 1, "symbols": 4 },
+      "Scala": { "files": 2, "symbols": 8 },
+      "Svelte": { "files": 1, "symbols": 1 },
+      "Swift": { "files": 2, "symbols": 8 },
+      "TOML": { "files": 4, "symbols": 23 },
+      "TypeScript": { "files": 9, "symbols": 36 },
+      "Vue": { "files": 1, "symbols": 3 },
+      "XML": { "files": 1, "symbols": 2 },
+      "YAML": { "files": 7, "symbols": 39 },
+      "Zig": { "files": 2, "symbols": 7 },
+      "Zsh": { "files": 1, "symbols": 2 }
+    },
+    "relations": {
+      "ACCESSES": 55,
+      "ASYNC_CALLS": 1,
+      "CALLS": 22642,
+      "CONFIGURES": 356,
+      "CONSTRUCTS": 63,
+      "CONTAINS": 3887,
+      "DATA_FLOWS": 5882,
+      "DEFINES": 12511,
+      "EMITS": 3,
+      "EXTENDS": 18,
+      "FILE_CHANGES_WITH": 55,
+      "HANDLES_GRAPHQL": 2,
+      "HANDLES_GRPC": 2,
+      "HANDLES_ROUTE": 49,
+      "HANDLES_TOOL": 17,
+      "HANDLES_TRPC": 1,
+      "HTTP_CALLS": 70,
+      "IMPLEMENTS": 7,
+      "IMPORTS": 2258,
+      "INHERITS": 18,
+      "LISTENS_ON": 2,
+      "OVERRIDES": 10,
+      "PARAM_TYPE": 1530,
+      "READS_FIELD": 1592,
+      "RESOURCE_DEPENDS_ON": 8,
+      "RETURNS_TYPE": 988,
+      "SIMILAR_TO": 3595,
+      "TESTS": 9,
+      "USES_TYPE": 2873,
+      "WRITES_FIELD": 381
+    }
+  },
+  "completeness_scope": {
+    "language": "Go",
+    "language_files": 404,
+    "other_language_failures": 5,
+    "other_failure_languages": ["C++ 5"],
+    "in_scope_warnings": [
+      {
+        "code": "W_DATA_FLOW_EVIDENCE_UNMERGED",
+        "severity": "info",
+        "effect_on_semantic_completeness": "each DATA_FLOWS relation carries every flow found by the symbol that produced it; on these edges a second symbol justified the same edge and its flows were dropped, so the evidence array explains the edge from one side only. The affected edges are counted, not identified: each record had already been written when its second producer appeared, so none of them can be marked individually and a consumer cannot tell from a relation alone whether it is one of them",
+        "detail": "5 DATA_FLOWS edge(s) were justified by more than one symbol, typically mutual recursion where one side forwards a parameter and the other returns a call; the relation, its confidence and its reason are unaffected. Independent of EVIDENCE_TRUNCATED: one edge can be both, neither supersedes the other, and this count includes edges that were also truncated"
+      }
+    ],
+    "worktree_snapshot": true,
+    "level": "degraded"
+  }
+}

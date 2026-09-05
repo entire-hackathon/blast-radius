@@ -15,13 +15,7 @@ describe("splitIdentifier", () => {
       "handle",
       "request",
     ]);
-    expect(splitIdentifier("src/repo/link_repo.ts")).toEqual([
-      "src",
-      "repo",
-      "link",
-      "repo",
-      "ts",
-    ]);
+    expect(splitIdentifier("src/repo/link_repo.ts")).toEqual(["src", "repo", "link", "repo", "ts"]);
     expect(splitIdentifier("HTTPServerError")).toEqual(["http", "server", "error"]);
   });
 });

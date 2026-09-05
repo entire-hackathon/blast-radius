@@ -94,9 +94,7 @@ export function all<T, E>(results: readonly Result<T, E>[]): Result<T[], E> {
 }
 
 /** Partition results, keeping every success and every failure. */
-export function settle<T, E>(
-  results: readonly Result<T, E>[],
-): { values: T[]; errors: E[] } {
+export function settle<T, E>(results: readonly Result<T, E>[]): { values: T[]; errors: E[] } {
   const values: T[] = [];
   const errors: E[] = [];
   for (const r of results) {

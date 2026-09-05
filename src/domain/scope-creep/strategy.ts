@@ -7,7 +7,14 @@
  * swapping a heuristic — a very plausible Noon Curve Ball — touches only this
  * folder.
  */
-import type { BlastRadius, ChangeSet, Finding, IntentModel, Severity, SymbolRef } from "../model.js";
+import type {
+  BlastRadius,
+  ChangeSet,
+  Finding,
+  IntentModel,
+  Severity,
+  SymbolRef,
+} from "../model.js";
 import { formatLocation, symbolKey } from "../model.js";
 
 export interface ScopeCreepInput {
@@ -73,10 +80,7 @@ export function callerTrail(
 ): { path: string[]; locations: { label: string; location: string | undefined }[] } {
   const related = radius.nodes
     .filter(
-      (n) =>
-        n.section === "callers" &&
-        n.originSymbols.includes(changedQualifiedName) &&
-        !n.isTest,
+      (n) => n.section === "callers" && n.originSymbols.includes(changedQualifiedName) && !n.isTest,
     )
     .sort((a, b) => a.distance - b.distance)
     .slice(0, limit);

@@ -63,7 +63,11 @@ describe("KeywordOverlapStrategy", () => {
 
   it("stays silent without an intent", () => {
     expect(
-      strat.evaluate({ intent: null, changeSet: changeSet([changed("Database.query", 9)]), radius: emptyRadius }),
+      strat.evaluate({
+        intent: null,
+        changeSet: changeSet([changed("Database.query", 9)]),
+        radius: emptyRadius,
+      }),
     ).toEqual([]);
   });
 

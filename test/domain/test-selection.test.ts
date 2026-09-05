@@ -49,7 +49,11 @@ describe("selectTests", () => {
   it("prefers closer tests and stops once every changed symbol is covered", () => {
     const plan = selectTests(
       radius([
-        testNode({ ref: testRef("directTest", "test/a.test.ts"), distance: 1, originSymbols: ["A"] }),
+        testNode({
+          ref: testRef("directTest", "test/a.test.ts"),
+          distance: 1,
+          originSymbols: ["A"],
+        }),
         testNode({ ref: testRef("farTest", "test/a2.test.ts"), distance: 3, originSymbols: ["A"] }),
         testNode({ ref: testRef("bTest", "test/b.test.ts"), distance: 2, originSymbols: ["B"] }),
       ]),
