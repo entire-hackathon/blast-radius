@@ -44,6 +44,11 @@ export function computeBlastRadius(
 ): BlastRadius {
   const originKeys = new Set(origin.map((s) => symbolKey(s.ref)));
   const originNames = new Set(origin.map((s) => s.ref.qualifiedName));
+  // siblings of a *newly added* symbol are just the other members of the same
+  // new class/module — they didn't change and tell a reviewer nothing.
+  const addedNames = new Set(
+    origin.filter((s) => s.changeType === "added").map((s) => s.ref.qualifiedName),
+  );
   const byKey = new Map<string, RadiusNode>();
 
   for (const list of nodeLists) {
@@ -51,6 +56,9 @@ export function computeBlastRadius(
       if (node.ref.external) {
         // external callees (fmt.Errorf, etc.) are noise for a review summary
         if (node.section === "callees") continue;
+      }
+      if (node.section === "siblings" && node.originSymbols.every((o) => addedNames.has(o))) {
+        continue;
       }
       const key = symbolKey(node.ref);
       // a changed symbol is the origin of the blast, never part of it; match on
