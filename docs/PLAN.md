@@ -8,19 +8,19 @@ This plan is written so a fresh agent session can pick it up cold.
 
 ## 0. Status board
 
-| Phase                                 | State                                          |
-| ------------------------------------- | ---------------------------------------------- |
-| P0 Fixtures + scaffold                | ✅                                             |
-| P1 Domain model + pipeline harness    | ✅                                             |
-| P2 Blast radius stage                 | ✅                                             |
-| P3 Scope-creep strategies             | ✅                                             |
-| P4 Test selection                     | ✅                                             |
-| P5 Renderers (markdown/json/sarif)    | ✅                                             |
-| P6 Adapters (graph cli, intent, sink) | ✅                                             |
-| P7 CLI + composition root             | ✅                                             |
-| P8 GitHub Action + demo repo          | ✅ live — Action posts a real comment on demo PR #1 |
+| Phase                                 | State                                                  |
+| ------------------------------------- | ------------------------------------------------------ |
+| P0 Fixtures + scaffold                | ✅                                                     |
+| P1 Domain model + pipeline harness    | ✅                                                     |
+| P2 Blast radius stage                 | ✅                                                     |
+| P3 Scope-creep strategies             | ✅                                                     |
+| P4 Test selection                     | ✅                                                     |
+| P5 Renderers (markdown/json/sarif)    | ✅                                                     |
+| P6 Adapters (graph cli, intent, sink) | ✅                                                     |
+| P7 CLI + composition root             | ✅                                                     |
+| P8 GitHub Action + demo repo          | ✅ live — Action posts a real comment on demo PR #1    |
 | P9 Dogfood + snapshot lock            | ✅ CI green, `v0.1.0` tagged, live PR comment verified |
-| P10 Pitch deck + recording            | ☐                                              |
+| P10 Pitch deck + recording            | ☐                                                      |
 
 Update the boxes as you go. Each phase ends with `npm test` green.
 As of the first build session: **67 tests green**, CI green on
