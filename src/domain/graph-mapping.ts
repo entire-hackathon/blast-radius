@@ -55,8 +55,33 @@ function mapChangeType(raw: string, reconciliation: string | undefined): ChangeT
 
 /* ----------------------------------------------------------------- diff --- */
 
-/** Structural (module-scope) change rows we don't treat as symbols. */
-const NON_SYMBOL_KINDS = new Set(["module", "file"]);
+/**
+ * Change rows that are not code symbols: module/file scope, and the structural
+ * "section" rows a Markdown / JSON / YAML file produces (headings, keys).
+ */
+const NON_SYMBOL_KINDS = new Set(["module", "file", "section", "document", "block"]);
+
+/** Data / doc languages whose entity rows are never call-graph symbols. */
+const NON_CODE_LANGUAGES = new Set([
+  "Markdown",
+  "JSON",
+  "YAML",
+  "TOML",
+  "XML",
+  "HTML",
+  "CSV",
+  "Plain Text",
+]);
+
+/** kinds that are only interesting when their signature changes or they vanish. */
+const MEMBER_KINDS = new Set(["field", "variable", "property", "constant", "enum_member"]);
+
+function isNoiseChange(kind: string, type: string): boolean {
+  // a brand-new field/variable is almost always just a member of a brand-new
+  // class or module — it clutters scope findings and coverage gaps and tells a
+  // reviewer nothing the containing symbol doesn't.
+  return MEMBER_KINDS.has(kind) && (type === "added" || type === "body_changed");
+}
 
 export function toChangeSet(raw: RawDiffResult): ChangeSet {
   const symbols: ChangedSymbol[] = [];
@@ -64,8 +89,10 @@ export function toChangeSet(raw: RawDiffResult): ChangeSet {
 
   for (const file of raw.files) {
     changedFiles.add(file.path);
+    if (file.language && NON_CODE_LANGUAGES.has(file.language)) continue;
     for (const change of file.changes) {
       if (NON_SYMBOL_KINDS.has(change.kind)) continue;
+      if (isNoiseChange(change.kind, change.type)) continue;
       const line = change.after_start_line ?? change.before_start_line;
       const ref: SymbolRef = {
         name: change.new_name ?? change.name,

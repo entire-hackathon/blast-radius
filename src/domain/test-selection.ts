@@ -35,7 +35,19 @@ function scoreOf(node: RadiusNode): number {
   return proximity + directCallerBonus;
 }
 
-function testNameFor(ref: SymbolRef, framework: TestFramework): string {
+/** A node whose "name" is really a file/module, not a test function. */
+function isFileLevelName(ref: SymbolRef): boolean {
+  return (
+    /\.[cm]?[jt]sx?$/.test(ref.name) ||
+    /_test\.(go|py)$/.test(ref.name) ||
+    ref.name === ref.file ||
+    ref.kind === "module" ||
+    ref.kind === "file"
+  );
+}
+
+function testNameFor(ref: SymbolRef, framework: TestFramework): string | null {
+  if (isFileLevelName(ref)) return null;
   const raw = ref.name;
   if (framework === "pytest" || framework === "go") return raw;
   // vitest/jest -t takes a substring of the test title; the symbol name is the
@@ -73,21 +85,32 @@ function synthesizeCommand(
   selected: readonly TestCandidate[],
 ): string | null {
   if (selected.length === 0) return null;
-  const names = [...new Set(selected.map((t) => testNameFor(t.ref, framework)).filter(Boolean))];
+  const names = [
+    ...new Set(selected.map((t) => testNameFor(t.ref, framework)).filter((n): n is string => !!n)),
+  ];
   const files = [...new Set(selected.map((t) => t.ref.file).filter((f): f is string => !!f))];
+  const filter = names.length > 0 ? names.join("|") : null;
 
   switch (framework) {
     case "go": {
       const dirs = [...new Set(files.map(packageDir))].map((d) => `./${d}/...`);
-      return `go test -run '^(${names.join("|")})$' ${dirs.join(" ")}`;
+      return filter
+        ? `go test -run '^(${filter})$' ${dirs.join(" ")}`
+        : `go test ${dirs.join(" ")}`;
     }
     case "vitest":
-      return `npx vitest run ${files.join(" ")} -t "${names.join("|")}"`;
+      return filter
+        ? `npx vitest run ${files.join(" ")} -t "${filter}"`
+        : `npx vitest run ${files.join(" ")}`;
     case "jest":
-      return `npx jest ${files.join(" ")} -t "${names.join("|")}"`;
+      return filter ? `npx jest ${files.join(" ")} -t "${filter}"` : `npx jest ${files.join(" ")}`;
     case "pytest":
       return `pytest ${selected
-        .map((t) => (t.ref.file ? `${t.ref.file}::${t.ref.name}` : t.ref.name))
+        .map((t) =>
+          t.ref.file && !isFileLevelName(t.ref)
+            ? `${t.ref.file}::${t.ref.name}`
+            : (t.ref.file ?? t.ref.name),
+        )
         .join(" ")}`;
     default:
       return null;
@@ -107,7 +130,12 @@ export function selectTests(
     .map((node) => ({ node, score: scoreOf(node) }))
     .sort((a, b) => b.score - a.score || a.node.distance - b.node.distance);
 
-  const originNames = origin.map((s) => s.ref.qualifiedName);
+  // gaps are only meaningful for behaviour — callable symbols that changed.
+  // A new type or a renamed field having "no test" is not a useful warning.
+  const CALLABLE = new Set(["function", "method", "constructor"]);
+  const behaviouralNames = origin
+    .filter((s) => CALLABLE.has(s.ref.kind ?? "") && s.changeType !== "added")
+    .map((s) => s.ref.qualifiedName);
   const covered = new Set<string>();
   const selected: TestCandidate[] = [];
 
@@ -126,7 +154,7 @@ export function selectTests(
     });
   }
 
-  const coverageGaps = originNames.filter((s) => !covered.has(s));
+  const coverageGaps = behaviouralNames.filter((s) => !covered.has(s));
 
   return {
     framework,

@@ -1,0 +1,92 @@
+name: "Blast Radius"
+description: "Impact-aware PR review powered by Entire Graph — blast radius, scope-drift check, minimal test set."
+branding:
+  icon: "target"
+  color: "orange"
+
+inputs:
+  base:
+    description: "Base revision (default: the PR base sha)."
+    required: false
+  head:
+    description: "Head revision (default: the PR head sha)."
+    required: false
+  entire-graph-ref:
+    description: "git ref of entireio/entire-graph to build."
+    required: false
+    default: "main"
+  intent-source:
+    description: "Comma list, in priority order."
+    required: false
+    default: "checkpoint-trailer,github-issue,pr-body"
+  fail-on-findings:
+    description: "Fail the check when scope findings exist."
+    required: false
+    default: "false"
+  upload-sarif:
+    description: "Upload findings to the Code scanning tab."
+    required: false
+    default: "false"
+  comment:
+    description: "Upsert the report as a PR comment."
+    required: false
+    default: "true"
+  blast-radius-ref:
+    description: "npm spec or github: spec for the CLI (default: this action's repo@version)."
+    required: false
+    default: "github:entire-hackathon/blast-radius"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Set up Go
+      uses: actions/setup-go@v5
+      with:
+        go-version: "1.26"
+        cache: false
+
+    - name: Restore entire-graph binary
+      id: cache-eg
+      uses: actions/cache@v4
+      with:
+        path: ~/.local/bin/entire-graph
+        key: entire-graph-${{ runner.os }}-${{ inputs.entire-graph-ref }}
+
+    - name: Build entire-graph
+      if: steps.cache-eg.outputs.cache-hit != 'true'
+      shell: bash
+      run: |
+        set -euo pipefail
+        tmp="$(mktemp -d)"
+        git clone --depth 1 --branch "${{ inputs.entire-graph-ref }}" \
+          https://github.com/entireio/entire-graph "$tmp"
+        ( cd "$tmp" && CGO_ENABLED=1 go build -trimpath -o entire-graph ./cmd/entire-graph )
+        mkdir -p ~/.local/bin
+        mv "$tmp/entire-graph" ~/.local/bin/entire-graph
+
+    - name: Add entire-graph to PATH
+      shell: bash
+      run: echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+
+    - name: Run Blast Radius
+      shell: bash
+      env:
+        GH_TOKEN: ${{ github.token }}
+      run: |
+        set -euo pipefail
+        args=(review --repo . --graph-head)
+        [ -n "${{ inputs.base }}" ] && args+=(--base "${{ inputs.base }}")
+        [ -n "${{ inputs.head }}" ] && args+=(--head "${{ inputs.head }}")
+        args+=(--intent-source "${{ inputs.intent-source }}")
+        args+=(--format markdown)
+        [ "${{ inputs.comment }}" = "true" ] && args+=(--comment)
+        [ "${{ inputs.upload-sarif }}" = "true" ] && args+=(--format sarif --sarif-out "$RUNNER_TEMP/blast-radius.sarif")
+        [ "${{ inputs.fail-on-findings }}" = "true" ] && args+=(--fail-on-findings)
+        npx --yes "${{ inputs.blast-radius-ref }}" "${args[@]}"
+
+    - name: Upload SARIF
+      if: inputs.upload-sarif == 'true'
+      uses: github/codeql-action/upload-sarif@v3
+      with:
+        sarif_file: ${{ runner.temp }}/blast-radius.sarif
+        category: blast-radius

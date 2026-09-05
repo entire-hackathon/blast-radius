@@ -1,0 +1,269 @@
+{
+  "base": "main",
+  "head": "HEAD",
+  "files": [
+    {
+      "path": ".entire/intent/cp_demo01.json",
+      "status": "A",
+      "language": "JSON",
+      "changes": [
+        {
+          "type": "added",
+          "kind": "section",
+          "name": "checkpoint",
+          "new_signature": "json key checkpoint",
+          "after_start_line": 2,
+          "dependents_count": 0
+        },
+        {
+          "type": "added",
+          "kind": "section",
+          "name": "title",
+          "new_signature": "json key title",
+          "after_start_line": 3,
+          "dependents_count": 0
+        },
+        {
+          "type": "added",
+          "kind": "section",
+          "name": "prompt",
+          "new_signature": "json key prompt",
+          "after_start_line": 4,
+          "dependents_count": 0
+        },
+        {
+          "type": "added",
+          "kind": "section",
+          "name": "body",
+          "new_signature": "json key body",
+          "after_start_line": 5,
+          "dependents_count": 3
+        }
+      ]
+    },
+    {
+      "path": "src/db/database.ts",
+      "status": "M",
+      "language": "TypeScript",
+      "changes": [
+        {
+          "type": "body_changed",
+          "kind": "class",
+          "name": "Database",
+          "before_start_line": 8,
+          "after_start_line": 10,
+          "dependents_count": 1
+        },
+        {
+          "type": "signature_changed",
+          "kind": "method",
+          "name": "Database.query",
+          "old_signature": "query(sql: string): Row[]",
+          "new_signature": "query(sql: string, opts: QueryOptions = {}): Row[]",
+          "before_start_line": 10,
+          "after_start_line": 12,
+          "dependents_count": 6
+        }
+      ]
+    },
+    {
+      "path": "src/db/types.ts",
+      "status": "A",
+      "language": "TypeScript",
+      "changes": [
+        {
+          "type": "added",
+          "kind": "interface",
+          "name": "QueryOptions",
+          "new_signature": "interface QueryOptions",
+          "after_start_line": 2,
+          "dependents_count": 6
+        },
+        {
+          "type": "added",
+          "kind": "field",
+          "name": "QueryOptions.timeoutMs",
+          "new_signature": "timeoutMs : number",
+          "after_start_line": 4,
+          "dependents_count": 3
+        },
+        {
+          "type": "added",
+          "kind": "field",
+          "name": "QueryOptions.readonly",
+          "new_signature": "readonly : boolean",
+          "after_start_line": 6,
+          "dependents_count": 5
+        }
+      ]
+    },
+    {
+      "path": "src/http/redirect-handler.ts",
+      "status": "M",
+      "language": "TypeScript",
+      "changes": [
+        {
+          "type": "body_changed",
+          "kind": "function",
+          "name": "handleRedirect",
+          "before_start_line": 15,
+          "after_start_line": 16,
+          "dependents_count": 1
+        }
+      ]
+    },
+    {
+      "path": "src/repo/link-repo.ts",
+      "status": "M",
+      "language": "TypeScript",
+      "changes": [
+        {
+          "type": "body_changed",
+          "kind": "class",
+          "name": "LinkRepo",
+          "before_start_line": 13,
+          "after_start_line": 14,
+          "dependents_count": 1
+        },
+        {
+          "type": "signature_changed",
+          "kind": "method",
+          "name": "LinkRepo.byId",
+          "old_signature": "byId(slug: string): Link | null",
+          "new_signature": "byId(slug: string, opts?: QueryOptions): Link | null",
+          "before_start_line": 15,
+          "after_start_line": 16,
+          "dependents_count": 3
+        },
+        {
+          "type": "signature_changed",
+          "kind": "method",
+          "name": "LinkRepo.save",
+          "old_signature": "save(link: Link): void",
+          "new_signature": "save(link: Link, opts?: QueryOptions): void",
+          "before_start_line": 21,
+          "after_start_line": 22,
+          "dependents_count": 3
+        },
+        {
+          "type": "signature_changed",
+          "kind": "method",
+          "name": "LinkRepo.hit",
+          "old_signature": "hit(slug: string): void",
+          "new_signature": "hit(slug: string, opts?: QueryOptions): void",
+          "before_start_line": 28,
+          "after_start_line": 30,
+          "dependents_count": 3
+        }
+      ]
+    },
+    {
+      "path": "src/service/rate-limit.ts",
+      "status": "A",
+      "language": "TypeScript",
+      "changes": [
+        {
+          "type": "added",
+          "kind": "class",
+          "name": "TokenBucketRateLimiter",
+          "new_signature": "class TokenBucketRateLimiter",
+          "after_start_line": 2,
+          "dependents_count": 1
+        },
+        {
+          "type": "added",
+          "kind": "field",
+          "name": "TokenBucketRateLimiter.capacity",
+          "new_signature": "capacity : number",
+          "after_start_line": 3,
+          "dependents_count": 3
+        },
+        {
+          "type": "added",
+          "kind": "field",
+          "name": "TokenBucketRateLimiter.refillPerSec",
+          "new_signature": "refillPerSec : number",
+          "after_start_line": 4,
+          "dependents_count": 3
+        },
+        {
+          "type": "added",
+          "kind": "field",
+          "name": "TokenBucketRateLimiter.buckets",
+          "new_signature": "buckets",
+          "after_start_line": 5,
+          "dependents_count": 2
+        },
+        {
+          "type": "added",
+          "kind": "method",
+          "name": "TokenBucketRateLimiter.constructor",
+          "new_signature": "constructor(capacity = 10, refillPerSec = 1)",
+          "after_start_line": 7,
+          "dependents_count": 1
+        },
+        {
+          "type": "added",
+          "kind": "method",
+          "name": "TokenBucketRateLimiter.take",
+          "new_signature": "take(key: string, now: number = Date.now()): boolean",
+          "after_start_line": 13,
+          "dependents_count": 2
+        },
+        {
+          "type": "added",
+          "kind": "variable",
+          "name": "redirectRateLimiter",
+          "new_signature": "redirectRateLimiter = new TokenBucketRateLimiter(20, 5)",
+          "after_start_line": 28,
+          "dependents_count": 1
+        }
+      ]
+    },
+    {
+      "path": "test/database.test.ts",
+      "status": "A",
+      "language": "TypeScript",
+      "changes": [
+        {
+          "type": "added",
+          "kind": "module",
+          "name": "test/database.test.ts",
+          "after_start_line": 1,
+          "dependents_count": 0
+        }
+      ]
+    },
+    {
+      "path": "test/link-repo.test.ts",
+      "status": "M",
+      "language": "TypeScript",
+      "changes": [
+        {
+          "type": "body_changed",
+          "kind": "module",
+          "name": "test/link-repo.test.ts",
+          "before_start_line": 1,
+          "after_start_line": 1,
+          "dependents_count": 0
+        }
+      ]
+    },
+    {
+      "path": "test/rate-limit.test.ts",
+      "status": "A",
+      "language": "TypeScript",
+      "changes": [
+        {
+          "type": "added",
+          "kind": "module",
+          "name": "test/rate-limit.test.ts",
+          "after_start_line": 1,
+          "dependents_count": 0
+        }
+      ]
+    }
+  ],
+  "schema_version": "1.1",
+  "producer_version": "dev"
+}

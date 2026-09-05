@@ -1,0 +1,11 @@
+{
+  "diff": "diff.json",
+  "impacts": {
+    "Database.query": "impact-Database.query.json",
+    "LinkRepo.byId": "impact-LinkRepo.byId.json",
+    "LinkRepo.save": "impact-LinkRepo.save.json",
+    "LinkRepo.hit": "impact-LinkRepo.hit.json",
+    "handleRedirect": "impact-handleRedirect.json",
+    "TokenBucketRateLimiter.take": "impact-TokenBucketRateLimiter.take.json"
+  }
+}
